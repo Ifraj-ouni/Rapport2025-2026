@@ -1,0 +1,374 @@
+\chapter{State of Artificial Intelligence}
+\section{Introduction}
+This chapter introduces the Artificial Intelligence foundations of our system. 
+To use its full potential, it is important to understand the current state of Artificial Intelligence and the key technologies behind it, from Large Language Models to Retrieval-Augmented Generation.
+\section{Large Language Model}
+In this Section, we will discuss Large Language Models (LLMs), covering their definition, history, types, training phases, common applications, and their limitations.
+
+\subsection{Definition}
+
+Large Language Models (LLMs) are AI systems based on deep neural networks trained on large datasets to understand and generate natural language. They rely on the transformer architecture, which is effective for processing text sequences and capturing context \cite{defllm}.
+
+\textbf{Figure 2.1} \cite{ialayers} shows the layers of Artificial Intelligence.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ia_layers.jpg}
+    \caption{The Field of Artificial Intelligence: Layer by Layer}
+\end{figure}
+\newpage
+\subsection{History}
+To understand Large Language Models (LLMs), we must first trace the history 
+that shaped them, a journey that, as illustrated in \textbf{Figure 2.2} 
+\cite{historyllm}, started slowly during the 1990s and early 2000s, when AI research remained focused on small and less complex projects.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{history_ia.jpg}
+    \caption{History of LLMs: Complete Timeline and Evolution (1950-2025)}
+    \label{fig:historyllm}
+\end{figure}
+
+
+The development of LLMs began in the 1950s with early Natural Language Processing (NLP) research and systems such as machine translation and ELIZA, which demonstrated basic human-computer interaction.
+
+Progress accelerated with the introduction of neural networks and LSTM models in the 1990s, followed by major NLP advances such as Word2Vec and CoreNLP in the 2010s.
+
+A major breakthrough occurred in 2017 with the Transformer architecture, which significantly improved language modeling performance. This led to models such as BERT in 2018, which enhanced contextual understanding of text.
+
+Finally, the release of ChatGPT in 2022 marked a major milestone, making LLMs widely accessible and accelerating their adoption in real-world applications.
+
+\subsection{Different types of Large Language Models(LLMs)}
+
+LLMs can be categorized into three types: pre-trained models, fine-tuned models, and multimodal models. Each type offers advantages depending on the desired outcome. \\
+
+%\renewcommand{\labelitemi}{\large$\bullet$}
+%\begin{itemize}
+    %\item \textbf{Pre-trained models: }These models are 
+    %trained on a massive amounts of data, which enables them %to understand, generate, summarize, and translate text %across a wide range of tasks.
+
+    %\item \textbf{Fine-tuned models: }These begin as pre-%trained models but are further trained on specific %datasets for particular use cases, making them more %precise and effective for targeted tasks.
+
+    %\item \textbf{Multimodal models: }Unlike traditional LLMs %that only process text, these models can handle multiple %types of data such as images, audio, and video, making %them significantly more capable and powerful. 
+
+%\end{itemize} 
+\begin{table}[H]
+\centering
+\caption{Types of Large Language Models}
+\label{tab:llm-types}
+\renewcommand{\arraystretch}{1.5} % Pour aérer les lignes comme dans ton modèle
+\begin{tabular}{|p{3.5cm}|p{5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Type} & \textbf{Description} & \textbf{Examples} & \textbf{Best For} \\
+\hline
+
+Pre-trained Models &
+Trained on massive general datasets; understand and generate text for a wide range of tasks. &
+GPT-4, LLaMA 2, BLOOM &
+General-purpose NLP tasks \\
+\hline
+
+Fine-tuned Models &
+Built on a pre-trained base and further trained on domain-specific data for targeted tasks. &
+Vicuna, CodeGen, fine-tuned BERT &
+Domain-specific tasks (legal, medical, code) \\
+\hline
+
+Multimodal Models &
+Process text, images, audio, and video simultaneously, making them significantly more capable. &
+GPT-4V, Gemini, Claude 3 &
+Visual QA, transcription, rich media analysis \\
+\hline
+
+\end{tabular}
+\end{table}
+
+
+\subsection{Real-world applications of Large Language Models (LLMs)}
+
+Large Language Models are widely used in various domains due to their versatility and ability to process natural language efficiently.
+
+\begin{itemize}
+\item \textbf{Chatbots and Virtual Assistants:} LLMs are used to build intelligent conversational agents capable of interacting with users in natural language.
+\item \textbf{Text Generation:} Automatic generation of articles, reports, and summaries.
+\item \textbf{Machine Translation:} Translating text between multiple languages with high accuracy.
+\item \textbf{Code Generation:} Assisting developers by generating and explaining code.
+\item \textbf{Information Retrieval:} Enhancing search engines by understanding user queries semantically.
+\end{itemize}
+
+
+
+\subsection{The most popular Large Language Models (LLMs)}
+The ecosystem of Large Language Models has evolved rapidly in recent years, with several organizations offering powerful models accessible through APIs. These models are widely adopted in real-world applications due to their scalability, high performance, and ease of integration into modern systems such as chatbots and intelligent applications.
+
+\begin{table}[H]
+\centering
+\caption{Popular API-based Large Language Models }
+\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{5cm}|}
+\hline
+\textbf{Model} & \textbf{Provider} & \textbf{Type} & \textbf{Key Strengths} \\
+\hline
+
+GPT-4 / GPT-4.1 &
+OpenAI &
+Multimodal &
+High accuracy, strong reasoning, excellent for RAG and complex queries \\
+\hline
+
+Claude 3 (Opus / Sonnet) &
+Anthropic &
+Multimodal &
+Long context window, safe outputs, strong document analysis \\
+\hline
+
+Gemini 1.5 Pro &
+Google &
+Multimodal &
+Very large context window (up to 1M tokens), ideal for long documents \\
+\hline
+
+Mistral Large &
+Mistral AI &
+Text-based &
+Fast, cost-efficient, strong performance in structured tasks \\
+\hline
+
+LLaMA 3 (API via providers) &
+Meta / Groq / Together AI &
+Text-based &
+Open ecosystem, flexible deployment, good balance performance/cost \\
+\hline
+
+\end{tabular}
+\end{table}
+
+The wide variety of available LLMs makes the selection process challenging. Therefore, it is important to define clear criteria for choosing the most suitable model for a given application.
+
+
+\subsection{Criteria for Choosing the Right Large Language Models}
+Choosing the right open-source Large Language Models(LLMs)
+means selecting the model that best matches your needs and application 
+
+The following \textbf{Table 2.2} presents comprehensive criteria for selecting LLMs.
+
+{
+\begin{table}[H]
+\centering
+\caption{LLM Selection Criteria}
+\begin{tabular}{|p{5cm}|p{6cm}|p{3cm}|}
+\hline
+\textbf{Criteria} & \textbf{Description} \\
+\hline
+
+Accuracy \& Reliability &
+Hallucination rate, citation precision, contextual fidelity, numerical accuracy  \\
+\hline
+
+Context Window &
+Maximum tokens supported and long-context performance \\
+\hline
+
+Multilingual Capability &
+Support for French, English, Arabic with cultural nuance understanding \\
+\hline
+
+Domain Expertise &
+Knowledge of PPP, infrastructure finance, contract law, financial modeling \\
+\hline
+
+Cost Efficiency &
+API pricing, caching, infrastructure costs \\
+\hline
+
+Latency \& Performance &
+TTFT, throughput, P95 latency \\
+\hline
+
+Tool Use &
+Function calling for database lookups, calculations, Excel queries \\
+\hline
+
+Safety \& Compliance &
+GDPR, zero retention, SOC 2, content filtering\\
+\hline
+
+\end{tabular}
+\end{table}
+
+
+
+
+
+\subsection{Limitations of Large Language Models}
+
+Despite their remarkable capabilities, Large Language Models (LLMs) present several limitations that can impact their reliability and effectiveness in real-world applications.
+
+\begin{itemize}
+
+\item \textbf{Hallucinations:} LLMs may generate incorrect or fabricated information that appears convincing, especially when they lack sufficient knowledge about a topic.
+
+\item \textbf{Knowledge Cutoff:} LLMs are trained on static datasets and do not have access to real-time or updated information unless explicitly integrated with external sources.
+
+\item \textbf{Lack of Domain-Specific Accuracy:} Without fine-tuning, LLMs may struggle to provide precise answers in specialized domains such as finance, law, or medicine.
+
+\item \textbf{Limited Context Window:} Although modern models support large contexts, they still cannot process extremely long documents efficiently without losing important information.
+
+\item \textbf{Data Privacy Concerns:} Using sensitive or confidential data with LLMs can raise privacy and compliance issues.
+
+\end{itemize}
+
+
+
+These limitations highlight the need for more reliable and context-aware approaches. 
+To overcome these challenges, Retrieval-Augmented Generation (RAG) has emerged as an effective solution by combining LLMs with external knowledge sources.
+
+
+
+
+\section{Retrieval Augmented Generation (RAG)}
+
+Retrieval Augmented Generation is a solution to the limitations of LLMs. In this section, we will discuss the definition of RAG, its pipeline, use cases, and the benefits of using RAG in conversational LLMs.
+
+\subsection{Definition}
+Retrieval Augmented Generation (RAG) is an architecture to improve an Artificial Intelligence model by connecting it to external knowledge sources. It helps Large Language Models (LLMs) give more relevant and higher quality answers.
+
+\subsection{Rag pipeline}
+
+\textbf{Figure 2.6} shows the RAG pipeline, which retrieves relevant information used by LLMs to generate accurate responses.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{RAG_workflow.png}
+    \caption{Basic RAG pipeline}
+\end{figure}
+
+The RAG pipeline explains how Large Language Models (LLMs) generate accurate answers by using external knowledge sources. The process begins with collecting documents from various sources, forming a comprehensive knowledge base that the system uses to support its responses. Once the data is gathered, it is divided into smaller segments called chunks, allowing efficient processing and search.
+
+Each chunk is then converted into a numerical representation called an embedding, which transforms text into vectors that can be processed by machines. All embeddings are stored in a vector database to enable fast retrieval of the most relevant information.
+
+When a user submits a question, the system converts it into a vector using the same embedding process. It then compares this query vector with stored vectors to retrieve the most relevant chunks. These chunks are combined to form a context that helps the model generate an informed answer.
+
+The LLM receives both the user query and the retrieved context, and by using this external knowledge, it produces responses that are more accurate, coherent, and less prone to hallucinations.
+
+Finally, the generated answer is returned to the user or integrated into a conversational interface, completing the RAG workflow. This ensures that each response is both well-structured and based on relevant and up-to-date information.
+
+\subsection{RAG Use Cases}
+RAG techniques are versatile and have been applied in multiple real-world domains, such as: 
+
+
+\begin{itemize}
+
+\item \textbf{Dynamic and updated information: }RAG allows LLM to give accurate and up-to-date by using real-time information. Without it, a regular LLM would not be different from a RAG-enabled one.
+
+\item \textbf{Reduced Errors: }RAG can make mistakes when they don't have enough knowledge. RAG reduce this by providing relevant information as context, so the LLM can generate more accurate answers.
+
+\item \textbf{Efficient and cost-effective: }RAG indexes data and stores it in a database, so it always has correct information ready.
+
+\item \textbf{Source attributions: }RAG provides links or citations for the data it uses, giving users more context and making the answer more trustworthy.
+
+\item \textbf{More scalable:}RAG can handle large amounts of information and grow with your needs. You can easily add new data or expand to other domains without starting from scratch.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+\subsection{Different Technologies: LlamaIndex vs LangChain}
+
+
+LlamaIndex and LangChain are frameworks used to build applications based on Large Language Models (LLMs), especially in Retrieval-Augmented Generation (RAG) systems.
+LlamaIndex is really good for building search and retrieval applications like the ones shown in \textbf{Table 2.4}.
+It helps users find information quickly and pick the relevant documents using LLMs.
+This is especially useful for projects that focus on finding documents because it is simple and works well and it can be used in different situations.
+LangChain is better at making pipelines and advanced chatbots.
+It has a lot of tools and resources that make it perfect for building chatbots.
+What is really cool about LlamaIndex is that it can use LangChain modules, which makes it very important for RAG applications.
+LlamaIndex also works well with tools like Docling so it provides an efficient way to manage document retrieval systems.
+LlamaIndex is a tool for document retrieval and it is even better when it is used with other tools, like LangChain and Docling.
+
+\begin{table}[H]
+\centering
+\caption{Feature Comparison: LlamaIndex vs. LangChain}
+\label{tab:llama_langchain}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{4cm}|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Feature / Aspect} & \textbf{LlamaIndex (with Docling)} & \textbf{LangChain} \\
+\hline
+
+Overview &
+A platform for structured document indexing and semantic retrieval, designed for precise information access. &
+A versatile framework for constructing LLM-based pipelines and connecting external data sources. \\
+\hline
+
+Advantages &
+Fast indexing, handles large-scale datasets, native Docling integration, and optimized for document workflows. &
+Supports multi-step workflows, easy LangSmith integration, and strong community support. \\
+\hline
+
+Limitations &
+Mainly focused on retrieval; less suitable for complex multi-step tool chaining. &
+Steeper learning curve and heavier configuration for simple document-centric tasks. \\
+\hline
+
+\end{tabular}
+\end{table}
+
+\subsection{Embedding Models in RAG Systems}
+
+Embedding models play a crucial role in Retrieval-Augmented Generation (RAG) systems. 
+They transform documents and queries into numerical vector representations, enabling semantic search and accurate retrieval. 
+Selecting the right embedding model directly impacts \textbf{retrieval accuracy, multilingual support, scalability, and efficiency}.
+
+\subsubsection{Criteria for Choosing an Embedding Model}
+
+When selecting an embedding model for a RAG system, the following criteria should be considered:
+
+\begin{itemize}
+    \item \textbf{Multilingual Support:} Ability to handle multiple languages for diverse datasets.
+    \item \textbf{Domain Adaptability:} Capacity to represent domain-specific content accurately (e.g., legal, financial, technical).
+    \item \textbf{Retrieval Accuracy:} Effectiveness in capturing semantic similarity for search and question-answering tasks.
+    \item \textbf{Scalability:} Efficiency for large document collections and high query loads.
+    \item \textbf{Embedding Type:} Dense embeddings for semantic similarity; hybrid embeddings for combining dense and sparse representations.
+    \item \textbf{Performance \& Efficiency:} Computational cost and speed, especially for real-time or large-scale retrieval.
+\end{itemize}
+
+\subsubsection{Candidate Embedding Models}
+
+\begin{table}[H]
+\centering
+\caption{Comparison of Embedding Models for RAG Systems}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|c|p{4cm}|}
+\hline
+\textbf{Model} & \textbf{Developer} & \textbf{Multilingual} & \textbf{Main Use} \\
+\hline
+BGE-M3 & BAAI & Yes & Hybrid retrieval  \\
+\hline
+Multilingual-e5-large & Microsoft & Yes & Semantic search \& QA  \\
+\hline
+JinaAI v4 & Jina AI & Yes & Multimodal retrieval  \\
+\hline
+all-mpnet-base-v2 & Sentence Transformers & Limited & Text similarity  \\
+\hline
+\end{tabular}
+\label{tab:embedding_models}
+\end{table}
+
+
+
+\section{Conclusion}
+
+In conclusion, this chapter has provided a clear overview of Large Language Models (LLMs), including their history, types, training phases, and main applications. It also introduced Retrieval-Augmented Generation (RAG), explained its pipeline, and describe the tools and embedding models used to implement it, such as LangChain, LlamaIndex, JinaAI, BGE-M3 and MPNet.
+
+Overall, this chapter highlighted how LLMs and RAG work together to build efficient accurate, and context-aware AI sytems.
+
+In the nexxt chapter, we will examine the project's functional and non functional-requirements along with its technical specifications. 
+
+
+
+

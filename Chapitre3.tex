@@ -1,0 +1,68 @@
+\chapter{Needs Analysis}
+\section{Introduction}
+The quality of any project is largely determined by the strength of its foundation. This chapter is therefore dedicated to analyzing the system requirements, starting with the functional and non-functional needs, followed by a presentation of the development tools used, and concluding with the use case diagram that captures the overall scope of the system. 
+
+\section{Functional needs}
+To ensure that Ask-Jade meets the expectations of its users, it is essential to identify all the functional requirements that the system must fulfill. These requirements define the core features and interactions that the platform must provide to each category of actors.
+
+\renewcommand{\labelitemi}{\large$\bullet$}
+\begin{itemize}
+    \item \textbf{Profile Management:} Users must be able to edit their personal profiles within the system to keep their information up to date.
+
+\item \textbf{Conversation Lifecycle Management:} The system must allow consultants to manage their inquiries through a dedicated interface. This includes the ability to start a new conversation, view their historical interactions, update ongoing discussions, and delete conversations that are no longer needed.
+
+\item \textbf{Natural Language Interaction:} The core of the system allows consultants to ask natural language questions. The "Ask-Jade" actor is responsible for processing these queries and responding to questions accurately.
+
+\item \textbf{Comprehensive Document Management:} The system must provide a robust "Manage Documents" module. This includes the ability for authorized users to upload new documents , archive outdated materials, delete documents, and restore previously archived or deleted documents when necessary.
+
+\item \textbf{Metadata Validation and Correction:} Beyond automated ingestion, the system must allow Document Managers to "Manage Metadata". This includes displaying extracted information and providing tools to validate, correct, or complete document metadata to ensure high-accuracy retrieval.
+
+\item \textbf{User Account Administration:} The Administrator must have full control over the user base through a "Manage User Accounts" feature. This includes the ability to add new users, update existing account details, delete users, and archive user profiles.
+
+\item \textbf{System Auditing and Logging:} The system must automatically generate activity logs. These logs must be accessible to administrators for security auditing and system monitoring.
+
+\item \textbf{Performance Analytics:} To support continuous improvement, the system must allow for the analysis of user questions and retrieval performance through a dedicated "View Questions Analytics" dashboard.
+
+\end{itemize}
+
+
+
+\section{Identification of Actors}
+Before defining the functional requirements, it is essential to identify the actors who interact with the system. An actor represents a role played by a user or an external system that exchanges information with Ask-Jade.
+
+\begin{itemize}
+\item \textbf{Consultant:} The primary end-user of the platform. This actor interacts with the system to ask natural language questions, manage their conversation history, and update their personal profile.
+\item \textbf{Document Manager:} A specialized user responsible for the quality of the knowledge base. Their role includes uploading documents and, most importantly, managing, validating, and correcting metadata to ensure high-accuracy retrieval.
+
+\item \textbf{Administrator:} The user in charge of system governance. This role manages user accounts (adding, updating, or deleting users) and monitors system security through audit logs.
+
+\item \textbf{Ask-Jade (System Actor):} Represented as an intelligent agent that processes user queries and generates context-aware responses based on the indexed document library.
+
+\item \textbf{System (Technical Actor):} An internal actor responsible for automated background tasks, history, such as generating logs and maintaining the document management lifecycle.
+\end{itemize}
+
+\section{Use Case Diagram}
+\begin{figure}[H]
+    \centering
+     \includegraphics[width=0.9\textwidth]{ask-jade-use-case.jpg}
+    \caption{Use Case Diagram}
+\end{figure}
+
+\section{Technical Specification}
+In this section, we outline the system's technical specifications, highlighting the software environment and the technologies and libraries utilized in the project's development.
+\subsection{Non-Functional Needs}
+The system must satisfy non-functional requirements that, while not part of its core functionality, are essential for ensuring quality and smooth operation.
+\begin{itemize}
+    \item \textbf{Ergonomics:} The system must provide a user-friendly and intuitive interface, allowing even inexperienced users to easily navigate and access its features without requiring special training.
+    
+    \item \textbf{Performance:} The system should be optimized to ensure fast response times and efficient processing of requests, minimizing latency and improving resource usage.
+    
+    \item \textbf{Reliability:} The system must be highly reliable, ensuring minimal downtime and consistent delivery of accurate results, with contextual awareness of the PPP project.
+    
+    \item \textbf{Scalability:} The system should be scalable, capable of adapting to increasing user demands and future growth without performance degradation.
+    
+    \item \textbf{Security:} The system must implement strong security measures to protect sensitive data, prevent unauthorized access, and comply with industry standards.
+\end{itemize}
+
+
+

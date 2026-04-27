@@ -1,0 +1,111 @@
+\chapter{Project Context}
+    %\addcontentsline{toc}{chapter}{}
+
+\section{Introduction}
+This chapter presents the host company, exploring its history, sectors of activity, and client portfolio. It also examines the project context by analyzing the existing situation, identifying its limitations, and proposing a solution to enhance the firm’s operations and support its continued success.
+
+\section{Host Company Presentation}
+This section introduces the host company, Jade Advisory, drawing on publicly available sources.
+\subsection{Jade Advisory Presentation}
+Jade Advisory \cite{WJade} is a consulting firm specializing in infrastructure finance and Public-Private Partnerships. Established in 2019 in Tunis, the company later opened offices in London (2020) and France (2024). With over 50 projects across Africa, the MENA region, and Europe, Jade Advisory brings together experts in finance, transport economics, and infrastructure planning.
+
+The firm provides technical advice to help clients develop cost-effective, sustainable, and innovative solutions, guiding them through all stages of a project’s lifecycle. Its services include advisory, training programs, project management, and infrastructure consulting focused on Public-Private Partnerships (PPP). Essentially, Jade Advisory supports public and private entities in structuring, evaluating, and managing complex projects, assessing financial viability and risks, and facilitating partnerships to streamline implementation. Delivering successful and valuable outcomes for every client remains its top priority.
+
+The \textbf{Figure 1.1} illustrates the distribution of jade Advisory's projects across Africa and MENA region. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{ProjectDist.png}
+    \caption{Distribution of Jade Advisory's projects in the MENA}
+    \label{fig:placeholder}
+\end{figure}
+\newpage
+\subsection{Sectors of Activity}
+Their specialization in Public-Private Partnerships enables them to deliver high-quality reports and strategic advice to both private sector actors and government agencies. As illustrated in \textbf{Figure 1.2} , Jade Advisory operates across several key sectors, including water management, municipal services, social infrastructure, transport, agriculture, and other infrastructure-related fields.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{JadeActivity.png}
+    \caption{Jade Advisory Working Areas}
+    \label{fig:placeholder}
+\end{figure}
+\newpage
+\subsection{Clients of Jade Advisory}
+Due to its experience, reliability, and commitment to delivering high-quality advisory services, Jade Advisory has built a strong and trusted client base, as presented in \textbf{Figure 1.3}. Over the years, the company has collaborated with public institutions, government agencies, and private sector organizations across Africa, the MENA region, and Europe, supporting the planning, structuring, and implementation of infrastructure and Public-Private Partnership projects.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{JadeClients.png}
+    \caption{Clients of Jade Advisory}
+    \label{fig:placeholder}
+\end{figure}
+\section{Project Presentation}
+In this section we will discuss the existing situation, identify its problems, and offer solutions to improve it and support the company's success.
+\subsection{Study of The Existing}
+The document library of Jade Advisory is growing significantly with every new project, making manual knowledge retrieval for guidance and learning increasingly difficult. As a result, there is a growing need for a smart knowledge retrieval and document management solution to help teams access relevant insights efficiently.
+
+Recognizing the challenges that came from exponential data growth, software companies such as OpenAI ,IBM and Microsoft made  it their mission to develop intelligent solutions, including AI assistants integrated into a knowledge base, or systems where you can provide documents can be provided as input and questions asked directly. These solutions makes it easier for organizations extract ,manage and use knowledge more efficiently. The main AI and knowledge management tools are presented and discussed further in the following section.
+\subsubsection{Overview of Existing Tools}
+The Table 1.1 presents a brief description of some existing intelligent Solutions
+\begin{table}[H]
+    \centering
+    \caption{Existing AI and Knowledge Management Tools}
+    \renewcommand{\arraystretch}{1.2} % more space between rows
+    \begin{tabular}{|l|p{10cm}|} % left-align tool names
+        \hline
+        \textbf{Tool} & \textbf{Definition} \\
+        \hline
+        Microsoft Copilot & AI assistant integrated into Microsoft 365 and SharePoint. Users can ask questions in natural language and retrieve answers directly from stored documents in Sharepoint. \\
+        \hline
+        IBM Watson & AI-powered knowledge management platform with natural language querying, document analysis, and enterprise security. Helps extract insights from large repositories. \\
+        \hline
+        Notion AI & AI assistant within Notion that summarizes notes, searches information, and generates content. Limited for versioned project documents. \\
+        \hline
+        Duet AI & Google’s AI assistant in Docs, Sheets, and Drive. Summarizes documents, answers questions, and assists content creation. Data is cloud-stored. \\
+        \hline
+    \end{tabular}
+    \caption{Existing AI and Knowledge Management Tools}
+    \label{tab:tools_definition}
+\end{table}
+To evaluate these tools fairly, it is important to define the criteria that will guide their comparison. The following section presents the key criteria used to assess the strengths and limitations of each tool.
+\subsubsection{Comparison Criteria}
+\begin{itemize}
+    \item \textbf{Knowledge Capture:} Ability of the tool to store, organize, and retrieve project knowledge and lessons learned effectively.
+    \item \textbf{Domain Specificity:} How well the tool handles content specific to the organization’s domain or industry.
+    \item \textbf{Data Privacy:} Indicates whether the tool keeps documents accessible only to the company, or if data is also stored or accessible by cloud providers.
+    \item \textbf{Customization:} The extent to which the tool allows customization for workflows, document structures, and AI responses.
+    \item \textbf{Insights:} The ability to generate actionable insights, summaries, or analyses from documents and data.
+    \item \textbf{Pricing:} Cost of the tool, including licensing, subscription, and any hidden fees.
+    \item \textbf{Synchronization:} How well the tool integrates and syncs data across platforms, teams, and devices.
+\end{itemize}
+\subsection{Criticism of The Existing}
+After examining Jade Advisory’s current system, we have discovered that SharePoint's inconsistent folder organization heavily implies difficult  manual search for team members to extract knowledge, while Microsoft Copilot despite being a natural candidate to address this limitation, remains a generic tool that lacks domain specificity, answer consistency, usage traceability, and comes at a significant recurring cost. The \textbf{Table \ref{tab:existing_limitations}} below summarizes the main limitations of both tools.  
+\begin{table}[H]
+    \centering
+     \caption{SharePoint and Microsoft Copilot Limitations}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|}
+    \hline
+       \textbf{Software}  & \textbf{Limitations} \\
+       \hline
+       \multirow{4}{*}{\includegraphics[height=4em]{sharep.png}} 
+            & Inconsistent storage \\
+            & Versioning restrictions \\
+            & Synchronization issues \\
+            & Data privacy concerns \\
+        \hline
+        \multirow{4}{*}{\includegraphics[height=4em]{copilot.png}} 
+            & Not domain specific \\
+            & Inconsistent answers \\
+            & No audit trail \\
+            & Expensive licensing \\
+         \hline 
+    \end{tabular}
+    \caption{SharePoint and Microsoft Copilot Limitations}
+    \label{tab:existing_limitations}
+\end{table}
+\subsection{Proposed Solution}
+As a solution to the challenges identified in the existing knowledge management system, this project proposes the development of a centralized, intelligent document management system based on a Retrieval-Augmented Generation (RAG) approach. 
+
+This system will transform Jade Advisory’s dispersed document library into a structured and searchable knowledge base. By leveraging cutting-edge AI technologies and modern data engineering practices, the RAG system will allow team members to retrieve information quickly and accurately, answer queries contextually, and access insights from past projects more efficiently.
+
+The proposed solution will also standardize document organization, indexing, and metadata management, making it easier to locate, update, and reuse knowledge. For new employees, the system will serve as a learning tool, providing fast access to relevant project information and organizational practices. Overall, this approach is designed to enhance productivity, reduce errors, improve decision-making, and empower Jade Advisory to make better use of its institutional knowledge, ultimately supporting the firm’s growth and success.
+\section{Conclusion}
+In this chapter, we introduced the host company, highlighting its history, main areas of activity, and client base. We also examined the existing knowledge management system, discussed its limitations, and presented a proposed solution. The following chapter will outline the functional and non-functional requirements of this solution, including the technical specifications, environment, and technologies necessary to enhance information management within the company.

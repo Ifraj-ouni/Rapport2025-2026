@@ -1,0 +1,99 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+% Diff?rentes options pour la classe :
+% - taille de la fonte    : 10pt, 11pt, 12pt
+% - recto ou recto-verso    : oneside, twoside
+% - stade de d?veloppement    : draft, final
+
+
+
+%\usepackage[latin1]{inputenc}    % Pour utiliser les lettres accentu?es
+
+%\usepackage[utf8]{inputenc}%           gestion des accents (source)
+%\usepackage[T1]{fontenc}%              gestion des accents (PDF)
+%\usepackage[francais,english]{babel}%          gestion du fran?ais
+\usepackage{textcomp}%                 caract?res additionnels
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[english]{varioref}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{ifpdf} % part of the hyperref bundle
+\usepackage{array}
+\usepackage{parskip}
+\usepackage[acronym]{glossaries}
+\usepackage[style=numeric,backend=biber]{biblatex}
+\addbibresource{Biblio.bib} 
+\usepackage{float}  % pour pouvoir utiliser [H]
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{caption}
+\usepackage{multirow} 
+\usepackage{makecell}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+%\usepackage{abstract}
+
+
+ % set fonts for nicer pdf view
+ \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em}
+\pagestyle{fancy}
+\fancyhead[L]{\nouppercase\leftmark} %pour afficher le nom du chapitre ? gauche
+\fancyhead[C]{}
+\fancyhead[R]{\nouppercase\rightmark} %pour afficher le nom de la section ? droite
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\textbf{\thepage}}
+
+% D?but du document
+\begin{document}
+
+\include{garde_fin_English}
+\include{garde_sign_fin_English}
+
+\newpage
+\pagenumbering{roman}
+\include{Dedicaces}
+\include{Remerciements}
+\tableofcontents    % Table des matières
+\listoffigures        % Liste des figures
+\listoftables  
+
+
+\newpage
+\pagenumbering{arabic}
+\include{Introduction}
+\include{Chapitre1}
+\include{Chapitre2}
+\include{Chapitre3}
+%\include{Conclusion}
+\newpage
+\printbibliography
+\addcontentsline{toc}{chapter}{Bibliography}
+%\nocite{*} 
+%\include{Annexe1}
+%
+
+%\bibliographystyle{alpha}
+%\bibliography{Biblio}
+%\addbibresource{Biblio.bib}
+
+
+
+
+\captionsetup[table]{skip=10pt}
+
+% Fin du document
+\end{document}
