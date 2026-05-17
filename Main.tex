@@ -1,99 +1,119 @@
 \documentclass[12pt,a4paper]{report}
+
+% ===================== PAGE SETUP =====================
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
-
-% Diff?rentes options pour la classe :
-% - taille de la fonte    : 10pt, 11pt, 12pt
-% - recto ou recto-verso    : oneside, twoside
-% - stade de d?veloppement    : draft, final
-
-
-
-%\usepackage[latin1]{inputenc}    % Pour utiliser les lettres accentu?es
-
-%\usepackage[utf8]{inputenc}%           gestion des accents (source)
-%\usepackage[T1]{fontenc}%              gestion des accents (PDF)
-%\usepackage[francais,english]{babel}%          gestion du fran?ais
-\usepackage{textcomp}%                 caract?res additionnels
-\usepackage[pdftex]{graphicx}
 \usepackage{setspace}
-\usepackage{hyperref}
-\usepackage[english]{varioref}
-\usepackage{fancyhdr}
-\usepackage{color}
-\usepackage{colortbl}
-\usepackage{amsmath}
-\usepackage{ifpdf} % part of the hyperref bundle
+\onehalfspacing
+
+% ===================== LANGUAGE =====================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,french]{babel}
+\usepackage{lmodern}
+\usepackage{fancyvrb}
+
+
+\usepackage{ragged2e}
 \usepackage{array}
-\usepackage{parskip}
-\usepackage[acronym]{glossaries}
-\usepackage[style=numeric,backend=biber]{biblatex}
-\addbibresource{Biblio.bib} 
-\usepackage{float}  % pour pouvoir utiliser [H]
+\usepackage{longtable}
 \usepackage{graphicx}
-\usepackage{tabularx}
-\usepackage{adjustbox}
-\usepackage{float}
-\usepackage[table]{xcolor}
-\usepackage{array}
-\usepackage{adjustbox}
-\usepackage{caption}
-\usepackage{multirow} 
-\usepackage{makecell}
-\usepackage{adjustbox}
 \usepackage{booktabs}
-%\usepackage{abstract}
+\usepackage{microtype}
 
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{longtable}
 
- % set fonts for nicer pdf view
- \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
-\setlength{\parindent}{2em}
-\setlength{\parskip}{0.2em}
+% ===================== MATH & SYMBOLS =====================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+
+% ===================== GRAPHICS & TABLES =====================
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[table]{xcolor}
+% ===================== TIKZ & CHARTS =====================
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+% ===================== BIBLIOGRAPHY =====================
+\usepackage[style=numeric,backend=biber]{biblatex}
+\addbibresource{Biblio.bib}
+\usepackage{csquotes}
+
+% ===================== LINKS =====================
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+
+% ===================== HEADER & FOOTER =====================
+\usepackage{fancyhdr}
+
 \pagestyle{fancy}
-\fancyhead[L]{\nouppercase\leftmark} %pour afficher le nom du chapitre ? gauche
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\headheight}{15pt}
+
+\fancyhead[L]{\nouppercase\leftmark}
 \fancyhead[C]{}
-\fancyhead[R]{\nouppercase\rightmark} %pour afficher le nom de la section ? droite
+\fancyhead[R]{\nouppercase\rightmark}
 
-\fancyfoot[L]{}
-\fancyfoot[C]{}
-\fancyfoot[R]{\textbf{\thepage}}
+\fancyfoot[C]{\thepage}
 
-% D?but du document
+% ===================== DOCUMENT =====================
 \begin{document}
+
+% ===================== FRONT PAGES =====================
 
 \include{garde_fin_English}
 \include{garde_sign_fin_English}
 
-\newpage
+\cleardoublepage
 \pagenumbering{roman}
+
 \include{Dedicaces}
 \include{Remerciements}
-\tableofcontents    % Table des matières
-\listoffigures        % Liste des figures
-\listoftables  
 
+\tableofcontents
+\listoffigures
+\listoftables
 
-\newpage
+% ===================== MAIN CONTENT =====================
+
+\cleardoublepage
 \pagenumbering{arabic}
+
 \include{Introduction}
 \include{Chapitre1}
 \include{Chapitre2}
 \include{Chapitre3}
-%\include{Conclusion}
-\newpage
+\include{Chapitre4}
+\include{Chapitre5}
+
+% ===================== BIBLIOGRAPHY =====================
+
+\cleardoublepage
+
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliography}
-%\nocite{*} 
-%\include{Annexe1}
-%
 
-%\bibliographystyle{alpha}
-%\bibliography{Biblio}
-%\addbibresource{Biblio.bib}
-
-
-
-
-\captionsetup[table]{skip=10pt}
-
-% Fin du document
 \end{document}

@@ -1,15 +1,18 @@
 \chapter{Project Context}
-    %\addcontentsline{toc}{chapter}{}
 
 \section{Introduction}
-This chapter presents the host company, exploring its history, sectors of activity, and client portfolio. It also examines the project context by analyzing the existing situation, identifying its limitations, and proposing a solution to enhance the firm’s operations and support its continued success.
+This chapter presents the host company, exploring its history, sectors of 
+activity, and client portfolio. It also examines the project context by 
+analyzing the existing situation, identifying its limitations, and proposing 
+a solution to enhance the firm's operations. Finally, it describes the 
+dataset used to build the system's knowledge base.
 
 \section{Host Company Presentation}
 This section introduces the host company, Jade Advisory, drawing on publicly available sources.
 \subsection{Jade Advisory Presentation}
 Jade Advisory \cite{WJade} is a consulting firm specializing in infrastructure finance and Public-Private Partnerships. Established in 2019 in Tunis, the company later opened offices in London (2020) and France (2024). With over 50 projects across Africa, the MENA region, and Europe, Jade Advisory brings together experts in finance, transport economics, and infrastructure planning.
 
-The firm provides technical advice to help clients develop cost-effective, sustainable, and innovative solutions, guiding them through all stages of a project’s lifecycle. Its services include advisory, training programs, project management, and infrastructure consulting focused on Public-Private Partnerships (PPP). Essentially, Jade Advisory supports public and private entities in structuring, evaluating, and managing complex projects, assessing financial viability and risks, and facilitating partnerships to streamline implementation. Delivering successful and valuable outcomes for every client remains its top priority.
+The firm provides technical advice to help clients develop cost-effective, sustainable, and innovative solutions, guiding them through all stages of a project's lifecycle. Its services include advisory, training programs, project management, and infrastructure consulting focused on Public-Private Partnerships (PPP). Essentially, Jade Advisory supports public and private entities in structuring, evaluating, and managing complex projects, assessing financial viability and risks, and facilitating partnerships to streamline implementation. Delivering successful and valuable outcomes for every client remains its top priority.
 
 The \textbf{Figure 1.1} illustrates the distribution of jade Advisory's projects across Africa and MENA region. 
 \begin{figure}[h]
@@ -18,37 +21,36 @@ The \textbf{Figure 1.1} illustrates the distribution of jade Advisory's projects
     \caption{Distribution of Jade Advisory's projects in the MENA}
     \label{fig:placeholder}
 \end{figure}
-\newpage
+
 \subsection{Sectors of Activity}
-Their specialization in Public-Private Partnerships enables them to deliver high-quality reports and strategic advice to both private sector actors and government agencies. As illustrated in \textbf{Figure 1.2} , Jade Advisory operates across several key sectors, including water management, municipal services, social infrastructure, transport, agriculture, and other infrastructure-related fields.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{JadeActivity.png}
-    \caption{Jade Advisory Working Areas}
-    \label{fig:placeholder}
-\end{figure}
-\newpage
+Their specialization in Public-Private Partnerships enables them to deliver high-quality reports and strategic advice to both private sector actors and government agencies. Jade Advisory operates across several key sectors, including water management, municipal services, social infrastructure, transport, agriculture, and other infrastructure-related fields.
+
 \subsection{Clients of Jade Advisory}
 Due to its experience, reliability, and commitment to delivering high-quality advisory services, Jade Advisory has built a strong and trusted client base, as presented in \textbf{Figure 1.3}. Over the years, the company has collaborated with public institutions, government agencies, and private sector organizations across Africa, the MENA region, and Europe, supporting the planning, structuring, and implementation of infrastructure and Public-Private Partnership projects.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{JadeClients.png}
     \caption{Clients of Jade Advisory}
     \label{fig:placeholder}
 \end{figure}
+
 \section{Project Presentation}
 In this section we will discuss the existing situation, identify its problems, and offer solutions to improve it and support the company's success.
+
 \subsection{Study of The Existing}
 The document library of Jade Advisory is growing significantly with every new project, making manual knowledge retrieval for guidance and learning increasingly difficult. As a result, there is a growing need for a smart knowledge retrieval and document management solution to help teams access relevant insights efficiently.
 
-Recognizing the challenges that came from exponential data growth, software companies such as OpenAI ,IBM and Microsoft made  it their mission to develop intelligent solutions, including AI assistants integrated into a knowledge base, or systems where you can provide documents can be provided as input and questions asked directly. These solutions makes it easier for organizations extract ,manage and use knowledge more efficiently. The main AI and knowledge management tools are presented and discussed further in the following section.
+Recognizing the challenges that came from exponential data growth, software companies such as OpenAI, IBM and Microsoft made it their mission to develop intelligent solutions, including AI assistants integrated into a knowledge base, or systems where documents can be provided as input and questions asked directly. These solutions make it easier for organizations to extract, manage and use knowledge more efficiently. The main AI and knowledge management tools are presented and discussed further in the following section.
+
 \subsubsection{Overview of Existing Tools}
-The Table 1.1 presents a brief description of some existing intelligent Solutions
+
+Table \textbf{1.1} presents a brief description of some existing intelligent solutions.
+
 \begin{table}[H]
     \centering
     \caption{Existing AI and Knowledge Management Tools}
-    \renewcommand{\arraystretch}{1.2} % more space between rows
-    \begin{tabular}{|l|p{10cm}|} % left-align tool names
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|p{10cm}|}
         \hline
         \textbf{Tool} & \textbf{Definition} \\
         \hline
@@ -58,54 +60,210 @@ The Table 1.1 presents a brief description of some existing intelligent Solution
         \hline
         Notion AI & AI assistant within Notion that summarizes notes, searches information, and generates content. Limited for versioned project documents. \\
         \hline
-        Duet AI & Google’s AI assistant in Docs, Sheets, and Drive. Summarizes documents, answers questions, and assists content creation. Data is cloud-stored. \\
+        Duet AI & Google's AI assistant in Docs, Sheets, and Drive. Summarizes documents, answers questions, and assists content creation. Data is cloud-stored. \\
         \hline
     \end{tabular}
-    \caption{Existing AI and Knowledge Management Tools}
     \label{tab:tools_definition}
 \end{table}
-To evaluate these tools fairly, it is important to define the criteria that will guide their comparison. The following section presents the key criteria used to assess the strengths and limitations of each tool.
+
+While these tools offer advanced capabilities for knowledge management, it is important to evaluate how well they meet the specific needs of Jade Advisory.
+
+\subsection{Criticism of The Existing}
+To better understand the limitations of these tools, the following criteria are used to evaluate their performance in the context of the company.
+
 \subsubsection{Comparison Criteria}
 \begin{itemize}
     \item \textbf{Knowledge Capture:} Ability of the tool to store, organize, and retrieve project knowledge and lessons learned effectively.
-    \item \textbf{Domain Specificity:} How well the tool handles content specific to the organization’s domain or industry.
+    \item \textbf{Domain Specificity:} How well the tool handles content specific to the organization's domain or industry.
     \item \textbf{Data Privacy:} Indicates whether the tool keeps documents accessible only to the company, or if data is also stored or accessible by cloud providers.
     \item \textbf{Customization:} The extent to which the tool allows customization for workflows, document structures, and AI responses.
-    \item \textbf{Insights:} The ability to generate actionable insights, summaries, or analyses from documents and data.
+    \item \textbf{Dependency:} The degree to which the tool relies on external ecosystems or platforms.
     \item \textbf{Pricing:} Cost of the tool, including licensing, subscription, and any hidden fees.
-    \item \textbf{Synchronization:} How well the tool integrates and syncs data across platforms, teams, and devices.
 \end{itemize}
-\subsection{Criticism of The Existing}
-After examining Jade Advisory’s current system, we have discovered that SharePoint's inconsistent folder organization heavily implies difficult  manual search for team members to extract knowledge, while Microsoft Copilot despite being a natural candidate to address this limitation, remains a generic tool that lacks domain specificity, answer consistency, usage traceability, and comes at a significant recurring cost. The \textbf{Table \ref{tab:existing_limitations}} below summarizes the main limitations of both tools.  
+
+\subsubsection{Comparison of the Tools}
+
+Table \textbf{1.2} presents a structured comparison of the existing AI tools based on the criteria defined above.
+
 \begin{table}[H]
-    \centering
-     \caption{SharePoint and Microsoft Copilot Limitations}
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|c|c|}
-    \hline
-       \textbf{Software}  & \textbf{Limitations} \\
-       \hline
-       \multirow{4}{*}{\includegraphics[height=4em]{sharep.png}} 
-            & Inconsistent storage \\
-            & Versioning restrictions \\
-            & Synchronization issues \\
-            & Data privacy concerns \\
-        \hline
-        \multirow{4}{*}{\includegraphics[height=4em]{copilot.png}} 
-            & Not domain specific \\
-            & Inconsistent answers \\
-            & No audit trail \\
-            & Expensive licensing \\
-         \hline 
-    \end{tabular}
-    \caption{SharePoint and Microsoft Copilot Limitations}
-    \label{tab:existing_limitations}
+\centering
+\caption{Comparison of Existing AI Tools}
+\label{tab:tools_comparison_explained}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.8cm}
+|>{\raggedright\arraybackslash}p{3cm}
+|>{\raggedright\arraybackslash}p{3cm}
+|>{\raggedright\arraybackslash}p{3cm}
+|>{\raggedright\arraybackslash}p{3cm}|}
+\hline
+\textbf{Criteria} & \textbf{Microsoft Copilot} & \textbf{IBM Watson} & \textbf{Notion AI} & \textbf{Duet AI} \\
+\hline
+Knowledge Capture & Can search and summarize SharePoint documents & Extract information from large datasets & Summarizes notes but struggles with many files & Summarizes Google Docs and Sheets \\
+\hline
+Domain Specificity & Generic, not adapted to Jade Advisory & Customizable for specific industries & Limited understanding of specialized documents & Mainly designed for common office documents \\
+\hline
+Data Privacy & Data stored in Microsoft Cloud with some control & Strong enterprise-level security & Stored in Notion Cloud with some privacy concerns & Data stored in Google Cloud services \\
+\hline
+Customization & Limited AI customization & Highly customizable workflows and analysis & Basic customization features & Very limited customization \\
+\hline
+Dependency & Strong dependence on Microsoft 365 ecosystem & Depends on IBM Cloud infrastructure & Fully dependent on the Notion platform & Integrated into Google Workspace ecosystem \\
+\hline
+Pricing & High subscription cost & Expensive enterprise licensing & Affordable for small teams & Expensive with Google Workspace \\
+\hline
+\end{tabular}
 \end{table}
+
 \subsection{Proposed Solution}
-As a solution to the challenges identified in the existing knowledge management system, this project proposes the development of a centralized, intelligent document management system based on a Retrieval-Augmented Generation (RAG) approach. 
+As a solution to the challenges identified in the existing knowledge management system, this project proposes the development of a centralized, intelligent document management system based on a Retrieval-Augmented Generation (RAG) approach.
 
-This system will transform Jade Advisory’s dispersed document library into a structured and searchable knowledge base. By leveraging cutting-edge AI technologies and modern data engineering practices, the RAG system will allow team members to retrieve information quickly and accurately, answer queries contextually, and access insights from past projects more efficiently.
+This system will transform Jade Advisory's dispersed document library into a structured and searchable knowledge base. By leveraging cutting-edge AI technologies and modern data engineering practices, the RAG system will allow team members to retrieve information quickly and accurately, answer queries contextually, and access insights from past projects more efficiently.
 
-The proposed solution will also standardize document organization, indexing, and metadata management, making it easier to locate, update, and reuse knowledge. For new employees, the system will serve as a learning tool, providing fast access to relevant project information and organizational practices. Overall, this approach is designed to enhance productivity, reduce errors, improve decision-making, and empower Jade Advisory to make better use of its institutional knowledge, ultimately supporting the firm’s growth and success.
+The proposed solution will also standardize document organization, indexing, and metadata management, making it easier to locate, update, and reuse knowledge. For new employees, the system will serve as a learning tool, providing fast access to relevant project information and organizational practices. Overall, this approach is designed to enhance productivity, reduce errors, improve decision-making, and empower Jade Advisory to make better use of its institutional knowledge, ultimately supporting the firm's growth and success.
+
+%=============================================================
+\section{Dataset Description}
+\label{sec:dataset}
+%=============================================================
+
+The quality and diversity of the dataset directly impact the performance of the Retrieval-Augmented Generation (RAG) system. This section presents the document corpus used in this project, including its structure, formats, and main processing challenges.
+
+%-------------------------------------------------------------
+\subsection{Dataset Overview}
+%-------------------------------------------------------------
+
+The dataset consists of internal enterprise documents related to Public-Private Partnership (PPP) projects and consulting activities. The documents were collected from the organization's SharePoint platform and include reports, meeting minutes, guides, and legal documents.
+
+The corpus is heterogeneous, multilingual, and multimodal, combining text, tables, and visual elements across different file formats.
+
+%-------------------------------------------------------------
+\subsection{Document Categories}
+%-------------------------------------------------------------
+
+Table \textbf{1.3} summarizes the main document categories included in the dataset.
+
+\begin{table}[H]
+\centering
+\caption{Main document categories in the dataset}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{Document Type} & \textbf{Description} \\
+\hline
+Meeting Minutes &
+Contain discussions, decisions, and action items from meetings.
+Usually semi-structured with text and simple tables. \\
+\hline
+Technical and Financial Reports &
+Present project progress, KPIs, and financial analysis using
+text, tables, and charts. \\
+\hline
+Operational Guides and Manuals &
+Describe internal procedures using structured instructions,
+diagrams, and images. \\
+\hline
+Contractual and Legal Documents &
+Contain formal agreements and legal information organized
+into articles and clauses. \\
+\hline
+\end{tabular}
+\label{tab:doc_types}
+\end{table}
+
+%-------------------------------------------------------------
+\subsection{Dataset Properties}
+%-------------------------------------------------------------
+
+The dataset contains several characteristics that increase the complexity of document processing and retrieval.
+
+\subsubsection{a- Multimodal Content}
+
+Documents combine different content types such as text, tables, and visual elements, requiring multiple extraction strategies.
+
+Table \textbf{1.4} presents the main content types identified in the dataset.
+
+\begin{table}[H]
+\centering
+\caption{Multimodal content types in the dataset}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{Content Type} & \textbf{Description} \\
+\hline
+Text &
+Narrative content, legal clauses, and technical terminology
+written in multiple languages. \\
+\hline
+Tables &
+Structured information such as budgets, KPIs, and schedules. \\
+\hline
+Images and Charts &
+Graphs, diagrams, and scanned visual content requiring OCR
+and layout-aware parsing. \\
+\hline
+\end{tabular}
+\label{tab:content_types}
+\end{table}
+
+\subsubsection{b- Multilingual Nature}
+
+The dataset mainly contains French and English documents, with some Arabic content. Therefore, the system must support multilingual retrieval.
+
+\subsubsection{c- File Formats}
+
+Documents are stored in different formats, mainly PDF, DOCX, and PPTX. Some PDF files are scanned documents containing non-selectable text and embedded images.
+
+%-------------------------------------------------------------
+\subsection{Technical Challenges and Design Implications}
+%-------------------------------------------------------------
+
+The dataset introduces several challenges that influenced the design of the proposed RAG pipeline.
+
+Table \textbf{1.5} outlines the main dataset challenges and their corresponding pipeline requirements.
+
+\begin{table}[H]
+\centering
+\caption{Dataset challenges and corresponding pipeline requirements}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{5cm}|p{7cm}|}
+\hline
+\textbf{Challenge} & \textbf{Pipeline Requirement} \\
+\hline
+Heterogeneous file formats &
+Unified parsing for PDF, DOCX, and PPTX documents. \\
+\hline
+Multimodal structure &
+Layout-aware extraction preserving text, tables, and visuals. \\
+\hline
+Scanned documents &
+Integration of OCR techniques for image-based content. \\
+\hline
+Domain-specific terminology &
+Semantic embeddings adapted to financial and legal content. \\
+\hline
+Multilingual content &
+Support for multilingual and cross-lingual retrieval. \\
+\hline
+\end{tabular}
+\label{tab:dataset_challenges}
+\end{table}
+
+%-------------------------------------------------------------
+\subsection{Dataset Illustration}
+%-------------------------------------------------------------
+
+Figure \textbf{1.3} shows an example of a representative document from the dataset, combining formatted text, tables, and multilingual content.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{data_jade.jpg}
+\caption{Example of a document from the dataset}
+\label{fig:dataset_example}
+\end{figure}
+
 \section{Conclusion}
-In this chapter, we introduced the host company, highlighting its history, main areas of activity, and client base. We also examined the existing knowledge management system, discussed its limitations, and presented a proposed solution. The following chapter will outline the functional and non-functional requirements of this solution, including the technical specifications, environment, and technologies necessary to enhance information management within the company.
+This chapter introduced the host company, highlighted its main areas of 
+activity, and examined the limitations of existing knowledge management tools. 
+A RAG-based solution was proposed to address these limitations. The dataset 
+used to build the knowledge base was also described, including its structure, 
+content types, and processing challenges. The following chapter will present 
+the key technologies underlying the proposed solution.
