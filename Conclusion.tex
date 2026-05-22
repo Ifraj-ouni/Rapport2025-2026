@@ -1,9 +1,44 @@
-\chapter*{Conclusion Générale}
-\markboth{Conclusion Générale}{}
+\chapter*{General Conclusion}
+\markboth{General Conclusion}{}
 \addcontentsline{toc}{chapter}{Conclusion Générale}
 
-Nous espérons que ce document vous a aidé à rédiger votre rapport convenablement.
+This project addressed the challenge of knowledge management at Jade
+Advisory by designing and implementing Ask-Jade, an intelligent
+question-answering system based on a Retrieval-Augmented Generation
+architecture. By transforming the organization's dispersed document
+library into a centralized and searchable knowledge base, the system
+empowers consultants to access relevant project information faster and
+more precisely, streamlining processes that were once time-consuming
+and manually intensive.
 
-Ce document vise à aider les étudiants à rédiger des rapports en Latex.
+Extensive research was conducted to identify and evaluate large language
+models and embedding models suited to the project's requirements.
+Following a comparative analysis, BGE-M3 was selected as the embedding
+model for its multilingual capabilities and hybrid retrieval support,
+while a configurable LLM layer allows the administrator to switch
+generation models directly from the interface without any redeployment.
+LlamaIndex was chosen as the orchestration framework for its native
+optimization for document indexing and its compatibility with Docling
+and pgvector, which form the core of the ingestion pipeline.
 
+The evaluation results confirm the relevance of the proposed approach.
+The final vector-only pipeline achieves strong performance across
+retrieval and generation metrics, with a hallucination rate below the
+target threshold and significant improvements in faithfulness and
+helpfulness compared to the initial graph-based architecture. The
+decision to remove the Neo4j knowledge graph was justified by both
+quantitative results and practical considerations of cost, latency,
+and extraction reliability on multilingual content.
 
+Beyond its technical contribution, Ask-Jade provides Jade Advisory
+with a secure and scalable solution that preserves data privacy,
+supports multilingual content in English, French, and Arabic, and
+gives users full traceability over generated answers through source
+citations linked to the original document chunks.
+
+As future work, several directions can be explored, including extending
+the evaluation benchmark, integrating an Excel lookup tool to allow
+consultants to query and extract structured data directly from
+spreadsheet-based project records, and developing a document management
+interface that centralizes the organization, versioning, and lifecycle
+tracking of all ingested files within the platform.

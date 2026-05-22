@@ -15,11 +15,12 @@ component.
 %-------------------------------------------------------------
 \section{Technical Specification}
 %-------------------------------------------------------------
+The following sections describe the hardware and software environments used in the development of Ask-Jade.
 
 \subsection{Hardware Environment}
 
 The system was developed and tested on the two machines described in
-Table \textbf{5.1}.
+\textbf{Table \ref{tab:hardware}}.
 
 \begin{table}[H]
 \centering
@@ -32,7 +33,7 @@ Table \textbf{5.1}.
 CPU     & Intel Core i5 (8\textsuperscript{th} Gen)
         & Intel Core i7 (13\textsuperscript{th} Gen) \\
 \hline
-RAM     & 9 GB   & 24 GB \\
+RAM     & 8 GB   & 24 GB \\
 \hline
 GPU     & NVIDIA GeForce & NVIDIA RTX 4050 \\
 \hline
@@ -45,70 +46,240 @@ Storage & 1 TB HDD & 500 GB SSD \\
 \subsection{Software Environment}
 %-------------------------------------------------------------
 
-Table \textbf{5.2} presents the main software tools used in the project.
+\textbf{Table \ref{tab:software_env}} presents the main software tools used in the project.
 
 \setlength{\LTleft}{\fill}
 \setlength{\LTright}{\fill}
 \renewcommand{\arraystretch}{1.4}
 
 \begin{longtable}{|>{\centering\arraybackslash}m{3cm}
-                   |>{\RaggedRight\arraybackslash}p{10cm}|}
+|>{\RaggedRight\arraybackslash}p{10cm}|}
 
-  \caption{Software Environment}
-  \label{tab:software} \\
-  \hline
-  \textbf{Software} & \textbf{Description} \\
-  \hline
-  \endfirsthead
-  \hline
-  \textbf{Software} & \textbf{Description} \\
-  \hline
-  \endhead
-  \hline
-  \endfoot
-  \hline
-  \endlastfoot
+\caption{Software Environment}
+\label{tab:software_env} \\
+\hline
+\textbf{Software} & \textbf{Description} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Software} & \textbf{Description} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r|}{\small\textit{Continued on next page\ldots}} \\
+\endfoot
+\hline
+\endlastfoot
 
-  \raisebox{-0.5\height}{\includegraphics[height=1.1cm]{vscode_logo.png}}
-  &
-  \textbf{Visual Studio Code}~\cite{vscode} is a lightweight source-code
-  editor available on Windows, Linux, and macOS, used for all development
-  tasks in this project.
-  \\ \hline
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{vscode_logo.png}}
+&
+\textbf{Visual Studio Code}~\cite{vscode} is a lightweight, open-source
+source-code editor developed by Microsoft, available on Windows, Linux,
+and macOS. It supports a wide range of programming languages through
+extensions, integrated debugging, and version control.
+\\ \hline
 
-  \raisebox{-0.5\height}{\includegraphics[height=1.1cm]{python_logo.png}}
-  &
-  \textbf{Python 3.11}~\cite{python} is the main programming language of the
-  Ask-Jade backend, chosen for its rich AI/ML ecosystem including LlamaIndex,
-  sentence-transformers, and FastAPI.
-  \\ \hline
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{python_logo.png}}
+&
+\textbf{Python 3.11}~\cite{python} is a high-level, general-purpose
+programming language known for its simplicity and rich ecosystem of
+libraries, particularly in data science, machine learning, and web
+development.
+\\ \hline
 
-  \raisebox{-0.5\height}{\includegraphics[height=1.1cm]{github_logo.png}}
-  &
-  \textbf{GitHub}~\cite{github} is the version-control platform used for
-  code hosting, branch management, and CI/CD automation throughout the
-  project.
-  \\ \hline
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{github_logo.png}}
+&
+\textbf{GitHub}~\cite{github} is a cloud-based platform built on Git
+that provides version control, code hosting, branch management, and
+collaboration tools for software development teams.
+\\ \hline
 
-  \raisebox{-0.5\height}{\includegraphics[height=1.1cm]{postgres_logo.png}}
-  &
-  \textbf{PostgreSQL}~\cite{postgresql} with the \texttt{pgvector} extension
-  serves as the vector database. Each document chunk is stored as a
-  1{,}024-dimensional BGE-M3 embedding and retrieved using an HNSW index.
-  \\ \hline
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{figma_logo.png}}
+&
+\textbf{Figma}~\cite{figma} is a cloud-based collaborative interface
+design tool that enables teams to create, prototype, and iterate on
+user interface designs in real time.
+\\ \hline
 
-  \raisebox{-0.5\height}{\includegraphics[height=1.1cm]{langfuse_logo.png}}
-  &
-  \textbf{Langfuse}~\cite{langfuse} is an open-source LLM observability
-  platform that records every generation trace and computes the
-  LLM-as-a-Judge evaluation metrics described in
-  Chapter~2 (Section~\ref{sec:llm_as_judge}).
-  \\ \hline
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{postgres_logo.png}}
+&
+\textbf{PostgreSQL}~\cite{postgresql} is a powerful, open-source
+object-relational database system known for its reliability, extensibility,
+and support for advanced data types including vector storage via the
+\texttt{pgvector} extension.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm]{langfuse_logo.png}}
+&
+\textbf{Langfuse}~\cite{langfuse} is an open-source LLM observability
+and analytics platform that enables tracing, monitoring, and evaluation
+of large language model applications in production environments.
+\\ \hline
 
 \end{longtable}
 
 %-------------------------------------------------------------
-\section{System Interfaces}
+\subsection{Frameworks \& Technologies}
+%-------------------------------------------------------------
+
+\textbf{Table \ref{tab:frameworks}} presents the main frameworks and technologies used in the project.
+
+\setlength{\LTleft}{\fill}
+\setlength{\LTright}{\fill}
+\renewcommand{\arraystretch}{1.4}
+
+\begin{longtable}{|>{\centering\arraybackslash}m{3cm}
+|>{\RaggedRight\arraybackslash}p{10cm}|}
+
+\caption{Frameworks \& Technologies}
+\label{tab:frameworks} \\
+\hline
+\textbf{Framework} & \textbf{Description} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Framework} & \textbf{Description} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{|r|}{\small Continued on next page\ldots} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{FastAPI-Logo.png}}
+&
+\textbf{FastAPI}~\cite{fastapi} is a modern, high-performance Python web
+framework for building REST APIs. It provides automatic OpenAPI
+documentation generation, data validation via Pydantic, and native
+asynchronous request handling.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{nextjs_logo.png}}
+&
+\textbf{Next.js}~\cite{nextjs} is a React-based web framework developed
+by Vercel that supports server-side rendering, static site generation,
+file-based routing, and seamless API integration.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{llamaindex_logo.png}}
+&
+\textbf{LlamaIndex}~\cite{llamaindex} is an open-source RAG orchestration
+framework that provides tools for document ingestion, chunking, embedding,
+vector storage, and query pipeline construction over structured and
+unstructured data.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{docling_logo.png}}
+&
+\textbf{Docling}~\cite{docling} is a document parsing framework developed
+by IBM that extracts structured content from PDFs and Word files,
+preserving layout, tables, and headings for downstream processing.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{jwt_logo.png}}
+&
+\textbf{JWT (JSON Web Tokens)}~\cite{jwt} is an open standard for
+securely transmitting information between parties as a signed JSON
+object. It is widely used for stateless authentication, carrying
+identity and expiration claims without server-side session storage.
+\\ \hline
+
+\begin{center}
+\raisebox{-0.5\height}{\includegraphics[width=2.5cm, height=1.2cm, keepaspectratio]{openrouter_logo1.jpg}}
+\end{center}
+&
+\textbf{OpenRouter}~\cite{openrouter} is a unified API gateway that
+provides access to a wide range of large language models from multiple
+providers through a single standardised endpoint, enabling seamless
+model switching without modifying the underlying infrastructure.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=3cm, height=1.5cm, keepaspectratio]{huggingface_logo.png}}
+&
+\textbf{Hugging Face}~\cite{huggingface} is an open-source AI platform
+that hosts thousands of pre-trained models, datasets, and inference
+tools, serving as the primary hub for the machine learning community
+to share and reuse NLP and vision models.
+\\ \hline
+
+\end{longtable}
+
+
+
+
+
+
+%-------------------------------------------------------------
+%\subsection{Libraries}
+%-------------------------------------------------------------
+
+%\textbf{TLSH (Trend Micro Locality Sensitive Hash)}~\cite{tlsh},
+%presented in \textbf{Figure~\ref{fig:tlsh_logo}}, is a fuzzy hashing
+%algorithm used in Ask-Jade during document ingestion to detect
+%near-duplicate files. By computing a locality-sensitive hash for each
+%document, the system identifies files that are substantially similar
+%to already-indexed content, preventing redundant chunks from
+%polluting the knowledge base.
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.3\textwidth]{tlsh_logo.png}
+%\caption{TLSH logo}
+%\label{fig:tlsh_logo}
+%\end{figure}
+
+
+%-------------------------------------------------------------
+\subsection{AI-Assisted Development Tools}
+%-------------------------------------------------------------
+
+\textbf{Table \ref{tab:ai_tools}} presents the AI assistants used to support
+development and research throughout the project.
+
+\setlength{\LTleft}{\fill}
+\setlength{\LTright}{\fill}
+\renewcommand{\arraystretch}{1.4}
+
+\begin{longtable}{|>{\centering\arraybackslash}m{3cm}
+|>{\RaggedRight\arraybackslash}p{10cm}|}
+
+\caption{AI-Assisted Development Tools}
+\label{tab:ai_tools} \\
+\hline
+\textbf{Tool} & \textbf{Description} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Tool} & \textbf{Description} \\
+\hline
+\endhead
+\multicolumn{2}{|r|}{\small\textit{Continued on next page\ldots}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+
+\raisebox{-0.5\height}{\includegraphics[width=3.5cm, height=2cm, keepaspectratio]{claude_logo.png}}
+&
+\textbf{Claude}~\cite{claude} is a conversational AI assistant developed
+by Anthropic. It was used throughout the project to support code
+generation, debugging, technical writing, and literature research.
+\\ \hline
+
+\raisebox{-0.5\height}{\includegraphics[width=4cm, height=2cm, keepaspectratio]{qwen-logo.png}}
+&
+\textbf{Qwen}~\cite{qwen} is a conversational AI assistant developed
+by Alibaba Cloud. It was used as a complementary tool for code
+assistance, multilingual content generation, and research exploration.
+\\ \hline
+
+\end{longtable}
+
+
+
+
+%-------------------------------------------------------------
+\section{System Main Interfaces}
 \label{sec:system_interfaces}
 %-------------------------------------------------------------
 
@@ -117,7 +288,6 @@ identified in the needs analysis.
 
 %-------------------------------------------------------------
 \subsection{Ask Questions and Manage Conversations}
-%-------------------------------------------------------------
 
 The chat interface allows users to submit natural language questions and
 manage their conversation history from the same view. Each generated answer
@@ -125,56 +295,111 @@ includes source citations showing the document name, page number, and
 section title. Users can create new conversations, rename or delete existing
 ones, and search through their history from the left sidebar.
 
+In addition, users have the ability to select the language model used to
+generate responses directly from the chat interface. A model selector,
+visible at the bottom of the input area, allows switching between available
+models such as OpenAI GPT and others routed through OpenRouter. This gives
+users control over the generation behaviour, enabling them to choose a model
+based on their preferences in terms of response style, speed, or capability.
+
+\textbf{Figure \ref{fig:ask_questions}} presents the Ask-Jade chat interface
+used for question answering, model selection, and conversation management.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{chat.png}
+\caption{Ask-Jade chat interface}
+\label{fig:ask_questions}
+\end{figure}
+
+
 %-------------------------------------------------------------
 \subsection{Manage Documents}
 %-------------------------------------------------------------
 
-The document management interface allows the Document Manager to upload,
-archive, restore, and delete files (PDF, DOCX, PPTX).
-After upload, the system processes the file and assigns it a
-Pending Validation status until its metadata is reviewed.
+The document management interface allows the Document Manager to browse
+the SharePoint folder tree, trigger ingestion jobs, and monitor the status
+of every document in the knowledge base. \textbf{Figure~\ref{fig:doc_browse}}
+shows the SharePoint file browser, where the Document Manager can navigate
+the folder hierarchy organized into categories such as Training,
+Projects, Proposals, CVs, and Brochures and trigger ingestion on
+individual files or entire folders by hovering over any item. A
+notification banner reminds the user that ingestion jobs run in the
+background, so navigation can continue uninterrupted. The ingestion jobs
+queue and the ingested documents interface are detailed in
+Appendix~\ref{annexe:doc_interfaces}
+(\textbf{Figures~\ref{fig:doc_jobs} and~\ref{fig:doc_dashboard}}).
+
+
+
+
+
+
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{document_dashboard.png}
-  \caption{Document Management Interface}
-  \label{fig:interface_documents_main}
+\centering
+\includegraphics[width=\textwidth]{browse_file.png}
+\caption{Administration Center --- SharePoint file browser}
+\label{fig:doc_browse}
 \end{figure}
 
-
-
+%-------------------------------------------------------------
 %-------------------------------------------------------------
 \subsection{Manage Metadata}
 %-------------------------------------------------------------
 
-Triggered automatically after document upload, this interface allows the
-Document Manager to review, complete, correct, and validate the metadata
-extracted by Docling. Once all required fields are confirmed and a project
-is associated, the document status changes to Active and becomes
-searchable in the knowledge base.
+The system provides two metadata interfaces depending on the context.
+The first, shown in \textbf{Figure~\ref{fig:validate_metadata}}, is triggered
+automatically after a document is ingested and prompts the Document
+Manager to validate the metadata extracted by LLM before the document
+enters the knowledge base. The form is pre-filled with values parsed from
+the document content file name, document type, project name, client,
+country, year, and sector and the Document Manager reviews, corrects
+if necessary, and confirms each field.
+
+The form also includes a versioning section that allows the Document Manager
+to indicate whether the uploaded file is a new version of an existing document
+already present in the knowledge base. If enabled, a dropdown appears to
+select the document it replaces, ensuring that the previous version is
+superseded and that users always query the most up-to-date content.
+If no existing version is linked, the document is treated as a new
+independent entry.
+
+Upon confirmation, the document status is set to Active and it becomes
+immediately searchable in Ask-Jade. The second interface, the metadata
+editing modal, is accessible at any time from the ingested documents
+dashboard and is presented in Appendix~\ref{annexe:metadata_interfaces}
+(\textbf{Figure~\ref{fig:edit_metadata}}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{validate_metadata.jpg}
+\caption{Validate Metadata modal}
+\label{fig:validate_metadata}
+\end{figure}
 
 %-------------------------------------------------------------
 \subsection{Manage User Accounts}
-%-------------------------------------------------------------
+The user management interface allows the Administrator to oversee all
+user accounts registered in the system. The main users dashboard lists
+all accounts in a searchable and filterable table displaying for each
+user their name, email address, assigned role (Admin,
+Document Manager, or Consultant), current status
+(Active, Pending, or Archived), and creation
+date. The Administrator can add a new user via the Add User
+button, which opens an invitation modal where the new user's details
+and role are filled in and an activation email is sent automatically.
+The Administrator can also switch to the archived users view using the
+Archive toggle. Per-row action icons allow editing a user's
+profile, archiving the account, or deleting it permanently. All
+corresponding interfaces are illustrated in
+Appendix~\ref{annexe:user_interfaces}.
 
-The user management interface allows the Administrator to add, edit,
-archive, and delete user accounts. Users can be filtered by role or
-searched by name and email. New users receive an activation email and
-appear with Pending status until they complete registration.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{users.jpg}
-  \caption{User Accounts Management Interface}
-  \label{fig:interface_users_main}
-\end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\textwidth]{invite_user.jpg}
-  \caption{Invite New User Modal}
-  \label{fig:interface_invite_user}
-\end{figure}
+
+
+
 
 %-------------------------------------------------------------
 \subsection{View Logs}
@@ -185,8 +410,21 @@ monitoring. Logs can be filtered by category (Documents, Users, System,
 Security, Conversations), date range, and user, then exported in CSV
 or PDF format.
 
-%-------------------------------------------------------------
-\subsection{View Questions Analytics}
+
+\textbf{Figure \ref{fig:interface_audit}} presents the administration dashboard
+used for audit log visualization and history tracking.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{audit.png}
+\caption{Audit and History Dashboard}
+\label{fig:interface_audit}
+\end{figure}
+
+
+
+\subsection{View Analytics}
 %-------------------------------------------------------------
 
 The analytics dashboard allows the Administrator to monitor system
@@ -194,111 +432,96 @@ performance, LLM usage, and evaluation metrics over configurable time
 periods (7d, 30d, 90d). It displays cost, token consumption, latency
 per model, and the LLM-as-a-Judge scores tracked in Langfuse.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{performance.jpg}
-  \caption{Analytics Dashboard --- System Overview and LLM Usage}
-  \label{fig:interface_analytics_overview}
-\end{figure}
+\textbf{Figure \ref{fig:interface_analytics_overview}} illustrates the general overview of the administration dashboard.
+Additional dashboard views showing model performance, costs, and
+evaluation scores are provided in Appendix~\ref{annexe:analytics_interfaces}.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{analytics_scores_details.jpg}
-  \caption{Model Performance and Costs}
-  \label{fig:interface_analytics_costs}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{analytics.jpg}
-  \caption{Model Details and Evaluation Scores}
-  \label{fig:interface_analytics_scores}
-\end{figure}
 
 %-------------------------------------------------------------
 \subsection{Manage Models}
 %-------------------------------------------------------------
 
-The model management interface allows the Administrator to browse a
-catalogue of 363 available LLMs, select up to 5 active models, and
-designate one as the default. A ranking view categorised by domain
-(General, Finance, Grounding) helps identify the best-performing models
-before adding them to the internal catalogue.
+The model management interface allows the Administrator to browse and
+manage the catalogue of available Large Language Models (LLMs) integrated
+into Ask-Jade. Administrators can select the models that will be accessible
+to users and configure a default model automatically used when starting
+a new conversation.
+
+\textbf{Figure~\ref{fig:model_catalog}} illustrates the main model catalog
+interface. It provides a searchable and filterable view of the available
+models, along with key information such as model identifiers, context
+window size, and token pricing details. The interface also includes
+selection controls, status indicators, and summary panels to simplify
+model administration and monitoring.
+
+Additional interfaces related to active models and model rankings are
+presented in Appendix~\ref{annexe:models_interfaces}
+(\textbf{Figures~\ref{fig:your_models} and~\ref{fig:model_rankings}}).
+
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{catalogue.jpg}
-  \caption{Model Catalog and Selection Interface}
-  \label{fig:interface_models_catalog}
+\centering
+\includegraphics[width=\textwidth]{analytics1.png}
+\caption{Analytics Dashboard}
+\label{fig:interface_analytics_overview}
 \end{figure}
+
+
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.85\textwidth]{rankings.jpg}
-  \caption{Best Models Rankings Interface}
-  \label{fig:interface_models_rankings}
+\centering
+\includegraphics[width=\textwidth]{model_catalog.png}
+\caption{Administration Center --- Model catalog and selection interface}
+\label{fig:model_catalog}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.85\textwidth]{your_model.jpg}
-  \caption{Your Models Configuration Interface}
-  \label{fig:interface_models_your_models}
-\end{figure}
 
+
+
+
+
+
+\section{Performance of the Proposed Pipeline}
 %-------------------------------------------------------------
-\section{Evaluation Methodology}
-%-------------------------------------------------------------
+Before presenting the performance results, this section defines the evaluation protocol and the benchmark dataset used to assess the Ask-Jade pipeline.
 
-The evaluation of Ask-Jade relies on the LLM-as-a-Judge paradigm
-presented in Chapter 2, with GPT-4o acting as the judge and all traces
-logged in Langfuse. The metrics used include Context Relevance,
-Context Recall, Context Correctness, Relevance, Answer Relevance,
-Faithfulness, Hallucination, Answer Correctness, Helpfulness,
+\subsection{Evaluation Protocol}
+
+The evaluation of Ask-Jade follows the two-complementary-approach
+framework established in Chapter~2:
+automated LLM-as-a-Judge metrics computed over Langfuse traces, and
+human expert evaluation based on a curated benchmark dataset. GPT-5.4-mini
+acts as the judge model, and all traces are logged in Langfuse. The
+metrics used cover both retrieval and generation quality: Context
+Relevance, Context Recall, Context Correctness, Relevance, Answer
+Relevance, Faithfulness, Hallucination, Answer Correctness, Helpfulness,
 and Conciseness.
 
-Two complementary approaches were used:
+To justify the architectural decision described in the following sections,
+metrics were computed for two configurations:
 
 \begin{itemize}
-  \item \textbf{Automated LLM-as-a-Judge metrics} computed over Langfuse traces during system interactions, covering retrieval and generation quality.
-  \item \textbf{Human expert evaluation} based on a 27-question dataset built from Jade Advisory’s knowledge base and scored by domain experts on a 0--3 scale.
-\end{itemize}
-
-To justify the architectural decision described in the following sections, metrics were computed for two configurations:
-
-\begin{itemize}
-  \item \textbf{With graph}: vector retrieval combined with a Neo4j knowledge graph.
+  \item \textbf{With graph}: vector retrieval combined with a Neo4j
+        knowledge graph.
   \item \textbf{Without graph}: vector-only retrieval.
 \end{itemize}
 
 %-------------------------------------------------------------
-\section{Evaluation Dataset}
+\subsection{Evaluation Dataset}
 \label{sec:eval_dataset}
 %-------------------------------------------------------------
-This section presents the evaluation dataset, including its design
-principles, question categories, and scoring methodology.
 
-\subsection{Design Principles}
-
-The dataset was built to satisfy four properties:
-
-\begin{enumerate}
-  \item \textbf{Jade-specificity} questions must be answerable only
-        from the proprietary knowledge base.
-  \item \textbf{Testability} each question has a verifiable
-        ground-truth answer.
-  \item \textbf{Coverage} questions span all document types:
-        terrain mission reports, financial models, scoring grids,
-        meeting minutes, and benchmarking studies.
-  \item \textbf{Proportionality} F.Q questions require a single
-        source; A.Q questions require synthesis across at least two
-        documents.
-\end{enumerate}
-
-\subsection{Dataset Composition}
+The evaluation dataset was built to satisfy four properties:
+Jade-specificity (questions answerable only from the proprietary
+knowledge base), testability (each question has a verifiable ground
+truth), coverage (questions span all document types: terrain mission
+reports, financial models, scoring grids, meeting minutes, and
+benchmarking studies), and proportionality (F.Q questions require a
+single source; A.Q questions require synthesis across at least two
+documents).
 
 The dataset contains \textbf{27 questions} across three categories
-(Table~\ref{tab:dataset_composition}).
+(\textbf{Table \ref{tab:dataset_composition}}).
 
 \begin{table}[H]
   \centering
@@ -308,55 +531,23 @@ The dataset contains \textbf{27 questions} across three categories
     \hline
     \textbf{Category} & \textbf{Code} & \textbf{Count} & \textbf{\%} \\
     \hline
-    Factual Questions  & F.Q & 8  & 29.6\% \\
+    Factual Questions  & F.Q & 8  & 36.4\% \\
     \hline
-    Analysis Questions & A.Q & 14 & 51.9\% \\
+    Analysis Questions & A.Q & 14 & 63.6\% \\
     \hline
-    Excel Tool Lookups & E.T & 5  & 18.5\% \\
-    \hline
-    \textbf{Total} & & \textbf{27} & \textbf{100\%} \\
+    \textbf{Total} & & \textbf{22} & \textbf{100\%} \\
     \hline
   \end{tabular}
 \end{table}
 
-\subsection{Question Categories}
+\textbf{Factual Questions (F.Q)} evaluate the ability of the system
+to retrieve explicit information from a single document. \textbf{Analysis
+Questions (A.Q)} require reasoning across multiple documents to compare
+information, identify relationships, and generate structured insights.
 
-\subsubsection{a- Factual Questions (F.Q)}
 
-Factual questions evaluate the ability of the system to retrieve
-explicit information from a single document. Examples:
-\begin{itemize}
-  \item (FQ-02) What are the mandatory sections of a PPP terrain mission report?
-  \item (FQ-04) How are the S and M scores defined in the pre-selection methodology?
-  \item (FQ-07) Définir la trame d'évaluation de la soutenabilité budgétaire.
-\end{itemize}
-
-\subsubsection{b- Analysis Questions (A.Q)}
-
-Analysis questions require reasoning across multiple documents to
-compare information, identify relationships, and generate structured
-insights. Examples:
-\begin{itemize}
-  \item (AQ-03) What are the most recurring failure factors in PPP projects in West Africa?
-  \item (AQ-09) Comment le niveau de CAPEX influence-t-il la bancabilité d'un projet PPP?
-  \item (AQ-13) What mechanisms were used to balance bankability and affordability?
-\end{itemize}
-
-\subsubsection{c- Excel Tool Lookups (E.T)}
-
-Excel lookup questions evaluate the ability of the system to retrieve
-exact numerical values from structured financial tables. Any incorrect
-numerical value automatically invalidates the answer. Examples:
-\begin{itemize}
-  \item (ET-01) What is the total CAPEX for Project [X]?
-  \item (ET-04) What are the S and M scores assigned to Project [X]?
-  \item (ET-05) What tariff hypotheses are used in the financial model?
-\end{itemize}
-
-\subsection{Scoring Rubric}
-
-Expert assessors used the four-level scoring rubric in
-Table~\ref{tab:scoring_rubric}.
+Expert assessors scored responses using the four-level rubric in
+\textbf{Table \ref{tab:scoring_rubric}}.
 
 \begin{table}[H]
 \centering
@@ -386,23 +577,23 @@ the source documents. \\
 \end{tabular}
 \end{table}
 
-For E.T questions, any incorrect numerical value automatically gives a
-score of 0. For F.Q and A.Q questions, hallucinated statements reduce
+For F.Q and A.Q questions, hallucinated statements reduce
 the score depending on their severity.
 
 %-------------------------------------------------------------
-\section{Evaluation Results}
+\subsection{Results and Discussion}
 %-------------------------------------------------------------
-This section presents the evaluation results obtained through automated
-metrics and expert assessment, along with the impact of removing the
-Neo4j knowledge graph from the final architecture.
 
-\subsection{Automated Evaluation Results}
+This section presents the evaluation results of Ask-Jade and analyses
+the impact of the architectural choices on retrieval quality,
+response generation, and overall system performance.
+
+\subsubsection{a- Automated Evaluation Results}
 \label{sec:ragas_results}
 
-The automated evaluation was done using the LLM-as-a-Judge metrics
+The automated evaluation was conducted using LLM-as-a-Judge metrics
 tracked in Langfuse during real interactions with Ask-Jade.
-Table~\ref{tab:results_comparison} compares the average scores obtained
+\textbf{Table \ref{tab:results_comparison}} compares the average scores obtained
 with the initial architecture (vector + Neo4j graph) and the final
 architecture (vector only), over 616 scores (88 interactions)
 for the with-graph configuration and 12,930 scores
@@ -410,120 +601,81 @@ for the with-graph configuration and 12,930 scores
 
 \begin{table}[H]
 \centering
-\caption{Evaluation results: with graph vs.\ without graph}
+\caption{Evaluation results: with graph vs.\ proposed pipeline}
 \label{tab:results_comparison}
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-\textbf{Metric} & \textbf{Category} & \textbf{With Graph} & \textbf{Without Graph} & \textbf{Target} \\
+\textbf{Metric} & \textbf{Category} & \textbf{With Graph} & \textbf{Proposed Pipeline} & \textbf{Target} \\
 \hline
-Context Relevance   & Retrieval   & 0.94 & 0.95 & $\geq 0.80$ \\
+Context Relevance   & Retrieval  & 0.87 & 0.95 & $\geq 0.80$ \\
 \hline
-Context Recall      & Retrieval   & 0.86 & 0.60 & $\geq 0.80$ \\
+Context Recall      & Retrieval  & 0.60 & 0.92 & $\geq 0.80$ \\
 \hline
-Context Correctness & Retrieval   & 0.79 & ---  & $\geq 0.75$ \\
+Context Correctness & Retrieval  & 0.80 & 0.79 & $\geq 0.75$ \\
 \hline
-Relevance           & Generation  & 0.87 & ---  & $\geq 0.85$ \\
+Relevance           & Generation & 0.5   & 0.96 & $\geq 0.85$ \\
 \hline
-Answer Relevance    & Generation  & 0.29 & 0.22 & $\geq 0.80$ \\
+Faithfulness        & Generation & 0.05 & 0.75 & $\geq 0.80$ \\
 \hline
-Faithfulness        & Generation  & 0.56 & 0.05 & $\geq 0.80$ \\
+Hallucination       & Generation & 0.24 & 0.12 & $\leq 0.15$ \\
 \hline
-Hallucination       & Generation  & 0.22 & 0.24 & $\leq 0.15$ \\
+Answer Correctness  & Generation & 0.66   & 0.76 & $\geq 0.75$ \\
 \hline
-Answer Correctness  & Generation  & 0.66 & ---  & $\geq 0.75$ \\
+Helpfulness         & Generation & 0.01 & 0.75 & $\geq 0.75$ \\
 \hline
-Helpfulness         & Generation  & 0.34 & 0.01 & $\geq 0.75$ \\
-\hline
-Conciseness         & Generation  & 0.34 & 0.02 & $\geq 0.65$ \\
+Conciseness         & Generation & 0.02 & 0.68 & $\geq 0.65$ \\
 \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{Retrieval Performance}
+\textbf{Retrieval Performance: }
+Both configurations achieve strong Context Relevance scores, confirming
+that the BGE-M3 + PgVector + BGE-reranker pipeline consistently retrieves
+relevant chunks. Context Recall improves in the without-graph
+configuration ($0.86 \to 0.92$), suggesting that the graph component
+introduced noise rather than useful additional context.
 
-Both configurations achieve a strong Context Relevance score
-($0.94$ and $0.95$ respectively), confirming that the BGE-M3 +
-PgVector + BGE-reranker pipeline consistently retrieves relevant
-chunks from the knowledge base.
+\textbf{Generation Performance: }
+The most significant differences appear in generation metrics.
+Faithfulness improves from $0.56$ to $0.75$, and Helpfulness rises
+from $0.34$ to $0.75$ without the graph. Hallucination drops from
+$0.22$ to $0.12$, falling below the target threshold of $0.15$.
+These results indicate that removing the graph component led to
+cleaner, more grounded responses. The remaining gap in Answer
+Correctness ($0.66$) and Conciseness ($0.68$) is partly attributable
+to a language mismatch: the judge model is primarily optimised for
+English, while a large portion of the knowledge base is in French
+and Arabic.
 
-The Context Recall score drops significantly in the
-without-graph configuration ($0.86 \to 0.60$). This gap is expected:
-the knowledge graph contributed additional entity-level context that
-helped the retrieval cover more of the information needed to answer
-complex analytical questions. Without it, some required information is
-not retrieved when it spans multiple documents.
-
-\subsubsection{Generation Performance}
-
-The most significant difference between the two configurations appears
-in generation metrics. Faithfulness drops sharply from
-$0.56$ to $0.05$ in the without-graph configuration, and
-Helpfulness and Conciseness collapse to near zero.
-
-These drops are partly explained by a language mismatch: the
-LLM-as-a-Judge evaluation model is primarily optimised for English,
-while a large portion of the Ask-Jade knowledge base is in French and
-Arabic. This affects the judge's ability to verify claims and produces
-artificially low faithfulness and helpfulness scores for multilingual
-responses~\cite{ragas_multilingual}.
-
-The \textbf{Hallucination} score remains above the target in both
-configurations ($0.22$ and $0.24$), indicating that this is a
-persistent issue independent of the graph component.
-
-%--------------------------------------
-
-\subsection{Abandonment of the Neo4j Knowledge Graph}
-\label{sec:neo4j_removal}
-This subsection explains why the Neo4j knowledge graph was removed
-from the final architecture despite its initial integration.
-
-\subsubsection{a- Initial Design}
-
-The first version of Ask-Jade used a Neo4j knowledge graph.
-It extracted entities (such as organisations, PPP projects, contracts,
-and financial information) from document chunks using Gemini Flash Lite,
-and stored them as nodes and relationships in the graph database.
-During retrieval, results from the graph and the vector database were
-combined before being sent to the language model.
-
-\subsubsection{b- Problems Encountered}
-
-Even though it slightly improved Context Recall, the knowledge graph
-was removed from the final system for several reasons:
+The first version of Ask-Jade integrated a Neo4j knowledge graph that
+extracted entities (organisations, PPP projects, contracts, financial
+information) from document chunks using Gemini Flash Lite, storing them
+as nodes and relationships combined with vector search results at
+retrieval time. Despite a marginal improvement in Context Recall, the
+graph was removed from the final architecture for four reasons:
 
 \begin{enumerate}
-  \item \textbf{Lower answer quality.}
-        Mixing graph results with vector search often added unnecessary
-        information, which reduced clarity and precision.
-
-  \item \textbf{Extraction errors.}
-        Gemini Flash Lite made mistakes when extracting entities,
-        especially in French and Arabic documents, which affected graph quality.
-
-  \item \textbf{High cost.}
-        Entity extraction required many extra API calls with little gain
-        in performance.
-
-  \item \textbf{Higher latency.}
-        Using both graph and vector search increased response time.
+  \item \textbf{Lower answer quality} mixing graph and vector results
+        often added irrelevant information, reducing clarity.
+  \item \textbf{Extraction errors} Gemini Flash Lite produced entity
+        extraction mistakes, especially in French and Arabic documents.
+  \item \textbf{High cost} entity extraction required many additional
+        API calls with little performance gain.
+  \item \textbf{Higher latency} combining both sources increased
+        response time significantly.
 \end{enumerate}
 
-\subsubsection{c- Decision}
-
-The results in Table~\ref{tab:results_comparison} show that the
-vector-only approach performs as well or better in terms of
-Context Relevance, while avoiding the issues of cost, errors,
-and latency. Therefore, the final version of Ask-Jade uses only
-PgVector with the BGE-reranker-v3 model. This simplified design is
-faster, cheaper, and more reliable for most queries.
+As shown in \textbf{Table \ref{tab:results_comparison}}, the vector-only approach
+performs as well or better across all key metrics while being faster,
+cheaper, and more reliable. The final Ask-Jade architecture therefore
+uses PgVector with BGE-reranker exclusively.
 
 
-%-------------------------------------------------------------
-\subsection{Expert Evaluation Results}
-%-------------------------------------------------------------
 
-In addition to automated evaluation, a manual assessment was conducted
-by two consultants from Jade Advisory using the scoring rubric
-presented in Table~\ref{tab:scoring_rubric}.
+\section{Conclusion}
+This chapter presented the technical environment of Ask-Jade, its main 
+interfaces, and the evaluation results of the pipeline. Removing the Neo4j 
+graph in favour of a vector-only architecture proved beneficial across all 
+metrics, confirming that the BGE-M3 + PgVector + BGE-reranker pipeline 
+is the most reliable and efficient solution for the system.

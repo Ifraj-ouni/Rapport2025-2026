@@ -5,14 +5,22 @@
 \usepackage{setspace}
 \onehalfspacing
 
+
+\usepackage{titlesec}
+
 % ===================== LANGUAGE =====================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[english,french]{babel}
+%\usepackage[english,french]{babel}
+\usepackage[french,english]{babel}
 \usepackage{lmodern}
 \usepackage{fancyvrb}
 
 
+\usepackage{enumitem}
+\setlist[itemize]{label=---}
+\usepackage{tcolorbox}
+\usepackage{listings}
 \usepackage{ragged2e}
 \usepackage{array}
 \usepackage{longtable}
@@ -89,8 +97,8 @@
 
 \cleardoublepage
 \pagenumbering{roman}
-
 \include{Dedicaces}
+\include{Dédicaces}
 \include{Remerciements}
 
 \tableofcontents
@@ -108,6 +116,7 @@
 \include{Chapitre3}
 \include{Chapitre4}
 \include{Chapitre5}
+\include{Conclusion}
 
 % ===================== BIBLIOGRAPHY =====================
 
@@ -115,5 +124,5 @@
 
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliography}
-
+\include{Annexe1}
 \end{document}

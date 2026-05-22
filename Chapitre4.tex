@@ -16,57 +16,29 @@ each technological choice is also discussed.
 
 To address the challenges described in previous chapters, a modular
 Retrieval-Augmented Generation (RAG) pipeline was designed to structure
-and exploit unstructured documents. LlamaIndex~\cite{llamaindex} is used
-as the main orchestration framework, connecting all stages from ingestion
-to answer generation. Based on the comparison in Chapter 2, it was chosen
-over LangChain due to its better support for indexing, vector storage,
-and query management.
+and exploit unstructured documents. As established in the comparative analysis of Chapter~2
+(Table~\ref{tab:llama_langchain}), LlamaIndex~\cite{llamaindex} was selected
+as the main orchestration framework over LangChain, due to its native
+optimisation for document indexing, structured retrieval, and compatibility
+with Docling and pgvector all of which are central components of the
+Ask-Jade pipeline.
 
-The pipeline is organised into two complementary layers:
+The pipeline is organised into two complementary pipelines:
 
 \begin{itemize}
   \item The \textbf{Ingestion pipeline} operates offline, before any user
-        interaction. It collects documents, parses and normalises their
-        content, splits text into semantic chunks, generates embeddings, and
-        persists everything in the vector database.
+        interaction. It processes documents by parsing and splitting extracted text into  chunks, generates embeddings, and
+        persists everything in the vector database, all via LlamaIndex ingestion pipeline.
 
   \item The \textbf{Retrieval pipeline} operates at query time via the
         LlamaIndex Condense Plus Context Chat Engine. It rewrites
         the user query from conversation history, expands it into multiple
         variants, retrieves relevant chunks, merges results via RRF Fusion,
-        reranks candidates, and produces a grounded, cited answer using a
-        configurable Large Language Model. Every generation trace is saved to
+        reranks candidates, and produces a grounded, cited answer using a configurable Large Language Model. Every generation trace is saved to
         Langfuse for observability.
 \end{itemize}
 
-%Table~\ref{tab:pipeline_stages} summarises each stage with its input, output,
-%and responsible component.
 
-%\begin{table}[H]
-%\centering
-%\caption{Stages of the Ask-Jade Pipeline}
-%\label{tab:pipeline_stages}
-%\renewcommand{\arraystretch}{1.4}
-%\begin{tabular}{|l|l|l|l|}
-%\hline
-%\textbf{Layer} & \textbf{Stage} & \textbf{Input} & \textbf{Output / Component} \\
-%\hline
-%\multirow{4}{*}{Ingestion}
-%  & Document acquisition   & Raw files             & Parsed text \textemdash{} Docling \\
-  %& Chunking               & Parsed text           & Text chunks \textemdash{} LlamaIndex \\
- % & Embedding              & Chunks                & Dense vectors \textemdash{} BGE-M3 \\
-%  & Storage                & Vectors + metadata    & PgVector \\
-%\hline
-%\multirow{6}{*}{Retrieval}
-  %& Query rewriting        & Query + history       & Reformulated query (Condense Step) \\
- % & Multi-query generation & Reformulated query    & 2--3 query variants \\
- % & Semantic retrieval     & Query variants        & Top-10 candidates per variant \\
- % & RRF Fusion             & Top-10 $\times$ N lists & Merged \& ranked candidates \\
-  %& Reranking              & Merged candidates     & Top-5 chunks \textemdash{} BGE-reranker-v2-m3 \\
- % & Answer generation      & Top-5 + query         & Cited answer \textemdash{} LLM (configurable) \\
-%\hline
-%\end{tabular}
-%\end{table}
 
 The following sections detail each pipeline in turn.
 
@@ -76,27 +48,25 @@ The following sections detail each pipeline in turn.
 % ═══════════════════════════════════════════════════════════════════════════════
 
 The ingestion pipeline transforms raw, heterogeneous documents into structured,
-searchable knowledge. It covers four stages: acquisition, parsing and chunking,
-embedding generation, and vector storage. Figure~\ref{fig:ingestion_pipeline}
+searchable knowledge. It covers four stages: acquisition, processing,
+embedding generation, and vector storage. \textbf{Figure~\ref{fig:ingestion_pipeline}}
 illustrates this flow.
 
-%\begin{figure}[H]
-  %\centering
-  %\includegraphics[width=\textwidth]{figure_ingestion.jpg}
-  %\caption{Ingestion pipeline of the Ask-Jade system}
-  %\label{fig:ingestion_pipeline}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{IngestionPipeline.png}
+  \caption{Ingestion pipeline of the Ask-Jade system}
+  \label{fig:ingestion_pipeline}
+\end{figure}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Document Acquisition}
 % ─────────────────────────────────────────────────────────────────────────────
  
-The system currently supports four document formats:
+The system currently supports three document formats:
 PDF, DOCX and PPTX.
 All documents come from the SharePoint connector,
-which automatically gets files from our organisations repository
-using a special LlamaIndex connector. This way new and updated corporate documents
-are always added automatically without needing any help.
+in which the user selects the files to ingest. This insures that  a single data source (source of truth) is maintained .
  
 Prior to entering the pipeline, each document is checked for near-duplicates
 via TLSH (Trend Micro Locality Sensitive Hash). Unlike cryptographic
@@ -109,13 +79,13 @@ prevents redundant storage even when documents differ only by minor edits,
 metadata updates, or formatting changes.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\subsection{Document Parsing and Chunking}
+\subsection{Document Processing}
 % ─────────────────────────────────────────────────────────────────────────────
 
 DOCX files are first converted to PDF to standardise the processing workflow.
 All documents are then processed by Docling~\cite{docling},
 an open-source document-understanding library developed by IBM Research.
-Table \textbf{4.1} compares Docling with
+\textbf{Table~\ref{tab:docling_comparison}} compares Docling with
 PyMuPDF~\cite{pymupdf} and pdfplumber~\cite{pdfplumber}.
 
 \begin{table}[H]
@@ -138,59 +108,74 @@ Metadata extraction  & Yes        & Limited    & No         \\
 \end{tabular}
 \end{table}
 
-Docling performs four successive operations on each document:
+Docling performs two main operations on each document:
 
 \begin{enumerate}
-  \item \textbf{Content extraction} reads raw text and table structures
-        while preserving the logical reading order, including complex
-        multi-column layouts.
-  \item \textbf{Cleaning and normalisation} removes formatting artefacts
-        such as repeated headers, footers, page numbers, and
-        table-of-contents entries.
-  \item \textbf{Metadata extraction} captures the source file name, page
-        numbers, section titles, detected language, and creation date.
-        This metadata travels with every chunk and is used for citation
-        generation in the final answers.
-  \item \textbf{Chunking} splits each document into semantically coherent chunks using a hybrid
-strategy that preserves document structure and applies overlap windows
-to reduce context loss between chunks.
+  \item \textbf{Text extraction} extracts raw text , table structures from documents. For scanned or image-based content, OCR is applied when needed. All while preserving the logical reading order, including complex multi-column layouts.
+  \item \textbf{Chunking} splits the extracted text using the Docling HybridChunker which performs structure-aware chunking while enforcing a maximum number of tokens. It also captures file metadata such as the source file name , page numbers and section titles. This metadata is attached automatically to every chunk and is used later for citation generation in the final answer.
 \end{enumerate}
+
+The resulting chunks are then sent to the embedding model, as described in the following section.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Embedding Generation}
-% ─────────────────────────────────────────────────────────────────────────────
 
-Each chunk is transformed into a dense numerical vector that encodes its
-semantic content in a continuous high-dimensional space, enabling
-similarity-based retrieval even without exact keyword overlap.
+In the embedding generation step, each chunk is transformed into a dense
+numerical vector that encodes its semantic content in a continuous
+high-dimensional space, enabling similarity-based retrieval even without
+exact keyword overlap.
 
-\textbf{BGE-M3}~\cite{bge_m3} was selected as the embedding model based on
-its superior multilingual performance on the MIRACL and MKQA benchmarks, its
-coverage of 100+ languages (including French, English, and Arabic), and its
-hybrid retrieval framework. The three retrieval modes it offers are all
-leveraged in Ask-Jade:
+Based on the comparative analysis conducted in Chapter~2, \textbf{BGE-M3}~\cite{bge_m3},
+developed by the Beijing Academy of Artificial Intelligence (BAAI), was
+selected as the embedding model for Ask-Jade. Its hybrid retrieval approach combining dense, sparse, and multi-vector representations along with
+its state-of-the-art performance on multilingual benchmarks such as MIRACL
+and MKQA, make it particularly well suited for the multilingual and
+domain-specific nature of Jade Advisory's document base.
+\textbf{Table~\ref{tab:bge_m3_specs}} summarises its key technical specifications.
 
-\begin{itemize}
-  \item \textbf{Dense embeddings} primary representation capturing global
-        semantic meaning; best balance of efficiency and expressiveness.
-  \item \textbf{Sparse embeddings} complement dense retrieval for
-        keyword-sensitive queries through weighted lexical signals.
-  \item \textbf{Multi-vector embeddings} applied for fine-grained
-        token-level matching between query and document representations.
-\end{itemize}
+\begin{table}[H]
+\centering
+\caption{BGE-M3 Technical Specifications}
+\label{tab:bge_m3_specs}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Property} & \textbf{Value} \\
+\hline
+Languages supported & 100+ (including French, English, Arabic) \\
+\hline
+Max input length & 8{,}192 tokens \\
+\hline
+Embedding dimension & 1{,}024 \\
+\hline
+Retrieval modes & Dense, Sparse (lexical), Multi-vector (ColBERT) \\
+\hline
+\end{tabular}
+\end{table}
+
+As shown in \textbf{Table~\ref{tab:bge_m3_specs}}, BGE-M3 combines broad multilingual
+coverage with flexible retrieval modes, confirming its suitability for
+enterprise-level RAG applications. In Ask-Jade, dense embeddings are used
+as the primary retrieval representation, capturing global semantic meaning
+across French, English, and Arabic documents.
+
+
+
+
+
+
+
+
+
+
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Vector Storage}
 % ─────────────────────────────────────────────────────────────────────────────
 
-Chunk embeddings are stored in a PostgreSQL database extended with the
-pgvector extension. PostgreSQL was retained because it is already
-part of the existing infrastructure, avoiding the operational overhead of an
-additional external service. Efficient similarity search is enabled by an
-Approximate Nearest Neighbor (ANN) index based on HNSW graphs, which quickly
-surfaces chunks that are semantically close to a query even in large-scale
-collections. Retrieval is further refined by metadata filters on document
-type, language, and project scope.
+Chunk embeddings are stored in a PostgreSQL database extended with both the pgvector and tsvector capabilities, enabling hybrid retrieval. Pgvector is used for semantic retrieval through vector similarity search, while tsvector supports keyword-based full-text search.
+PostgreSQL was chosen because it is already part of the existing infrastructure, avoiding the operational overhead of introducing an external search service.
+Efficient similarity search is enabled using an Approximate Nearest Neighbor (ANN) index based on Hierarchical Navigable Small World (HNSW) graphs, which allows fast retrieval of semantically similar chunks even in large-scale collections.
 
 % ═══════════════════════════════════════════════════════════════════════════════
 \section{Retrieval Pipeline}
@@ -198,15 +183,15 @@ type, language, and project scope.
 % ═══════════════════════════════════════════════════════════════════════════════
 
 The retrieval pipeline processes a user query through six sequential stages and
-returns a grounded, cited response. Figure~\ref{fig:retrieval_pipeline}
+returns a grounded, cited response. \textbf{Figure~\ref{fig:retrieval_pipeline}}
 illustrates the full flow.
 
-%\begin{figure}[H]
-  %\centering
-  %\includegraphics[width=\textwidth]{figure_retrieval.jpg}
-  %\caption{Retrieval pipeline of the Ask-Jade system}
-  %\label{fig:retrieval_pipeline}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{RetrievalPipeline.png}
+  \caption{Retrieval pipeline of the Ask-Jade system}
+  \label{fig:retrieval_pipeline}
+\end{figure}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Query Rewriting (Condense Step)}
@@ -223,7 +208,7 @@ To improve semantic coverage, the reformulated query is expanded into 2 to 3
 variants by an LLM. Because the same information can be expressed in multiple
 ways across source documents, each variant is independently embedded and used
 to query the vector store, broadening the candidate set beyond what a single
-formulation would return.
+formulation would return. This approach also helps simplify retrieval for complex, composed questions.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Semantic Retrieval}
@@ -238,19 +223,21 @@ well, and naturally supports cross-lingual search (e.g.\ a French query
 retrieving English source material).
 
 % ─────────────────────────────────────────────────────────────────────────────
-\subsection{RRF Fusion}
+\subsection{Reciprocal Rank Fusion (RRF)}
 % ─────────────────────────────────────────────────────────────────────────────
 
 The $N$ ranked lists are merged using Reciprocal Rank Fusion (RRF),
-which assigns each document a score inversely proportional to its rank:
+which assigns each document a score inversely proportional to its rank: The RRF score equation can be found at equation ~\ref{eq:rrf_score}.
 
-\[
-  \mathrm{RRF\_score}(d) = \sum_{i=1}^{N} \frac{1}{k + \mathrm{rank}_i(d)}
-\]
+\begin{equation}
+\mathrm{RRF\_score}(d) =
+\sum_{i=1}^{N} \frac{1}{k + \mathrm{rank}_i(d)}
+\label{eq:rrf_score}
+\end{equation}
 
-where $k = 60$ is a smoothing constant. RRF is robust to score-scale
-differences across variants and naturally promotes documents that rank highly
-across multiple formulations, producing a single merged candidate list.
+where $k = 60$ is a smoothing constant. 
+
+RRF is needed because each query variant produces a different ranking of results and similarity scores are not comparable across queries. Instead of averaging scores, it merges results based on their ranks, producing a more stable final ranking that favors documents consistently ranked at the top.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Reranking}
@@ -268,33 +255,14 @@ generation.
 % ─────────────────────────────────────────────────────────────────────────────
 
 The final stage generates a grounded response from the top-5 reranked chunks
-and the user query. A key design requirement is that the Administrator can
+and the user query. A key design requirement is flexibility, allowing the administrator to
 switch the generation model directly from the application interface no
 code change or redeployment is needed allowing the organisation to adopt
 new releases, control costs, or adjust to evolving performance benchmarks.
 
-Three API-based models are supported (Table~\ref{tab:llm_comparison}).
-
-\begin{table}[H]
-\centering
-\caption{LLMs available for generation in Ask-Jade}
-\label{tab:llm_comparison}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Model} & \textbf{Context Window} & \textbf{Reasoning}
-               & \textbf{Citation} & \textbf{Multilingual} \\
-\hline
-GPT-4o            & High (128k)      & Very strong & Medium      & Strong \\
-Claude Sonnet 4.0 & Very high (200k) & Strong      & Very strong & Strong \\
-Llama 3 (via API) & Medium (8k)      & Moderate    & Low         & Moderate \\
-\hline
-\end{tabular}
-\end{table}
-
-\textbf{GPT-4o} is the default because it provides the best balance between
-reasoning capability, multilingual understanding, and large-context processing
-for professional document retrieval in the PPP consulting domain.
+The default LLM is \textbf{gpt-5.4-mini} because it provides the best balance between
+reasoning capability, multilingual understanding, and large-context processing, making it suitable
+for professional document-based retrieval in the PPP consulting domain.
 
 All supported models share a common provider abstraction layer: they receive
 the same structured prompt and return a response in the same format. Switching
@@ -303,7 +271,7 @@ in the database. The prompt contains three elements:
 
 \begin{enumerate}
   \item \textbf{System instruction} defines the assistant's role, output
-        format, response language, and citation rules.
+        format, response language, and citation rules and critical constraints such as safety and grounding requirements. 
   \item \textbf{Retrieved context} the top-5 reranked chunks, each
         annotated with its source document, page number, and section title.
   \item \textbf{User query} the original question as submitted.
@@ -311,8 +279,9 @@ in the database. The prompt contains three elements:
 
 The model is instructed to answer exclusively from the provided context, cite
 every factual claim with its source chunk, and respond in the same language as
-the user's query (French, English, or Arabic). The result is a grounded
+the user's query (French, English). The result is a grounded
 response with traceable citations linked to the original document chunks.
+The full generation prompt is provided in Appendix~\ref{annexe:generation_prompt}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Observability with Langfuse}
@@ -322,17 +291,17 @@ After each answer is generated, the complete prompt trace system
 instruction, retrieved context, user query, and model response is saved to
 Langfuse ~\cite{langfuse}. This provides full observability over the
 generation pipeline, enabling the team to inspect LLM calls, monitor token
-usage and costs, evaluate answer quality, and debug unexpected outputs without
+usage and costs, evaluate answer quality using it's built in LLM-as-a-Judge capabilities, and debug unexpected outputs without
 modifying any application code.
 
 
 
 \section{Conclusion}
 This chapter presented the two core pipelines of the Ask-Jade system.
-The ingestion pipeline handles document acquisition, parsing, chunking,
+The ingestion pipeline handles document acquisition, processing, embedding
 and vector storage, while the retrieval pipeline processes user queries
 through rewriting, multi-query expansion, semantic retrieval, fusion,
-reranking, and answer generation. Together, these components form a
+reranking, and answer generation and the langfuse observability. Together, these components form a
 modular and scalable RAG architecture. The following chapter will present
-the technical environment, the system interfaces, and the evaluation
+the technical specification, the system interfaces, and the evaluation
 of the final architecture.

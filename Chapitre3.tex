@@ -1,313 +1,492 @@
-\chapter{Needs Analysis and Conceptual Study}
+\chapter{Generative AI : State of the Art}
+\markboth{\small Chapter 3. Generative AI : State of the Art}{\small Chapter 3. Generative AI : State of the Art}
+%-------------------------------------------------------------
+
+
 \section{Introduction}
-The quality of any project is largely determined by the strength of its foundation. This chapter is therefore dedicated to analyzing the system requirements, starting with the functional and non-functional needs, followed by a presentation of the development tools used, and concluding with the use case diagram that captures the overall scope of the system. 
 
 
-\section{Need Analysis}
-This section presents the functional and non-functional requirements
-of the Ask-Jade system, as well as the different actors interacting
-with the platform.
-\subsection{Functional Needs}
-To ensure that Ask-Jade meets the expectations of its users, it is essential to identify all the functional requirements that the system must fulfill. These requirements define the core features and interactions that the platform must provide to each category of actors.
+Generative Artificial Intelligence enables the automatic generation of content such as text, images, and code. It is mainly driven by Large Language Models (LLMs) based on Transformer architectures, which provide strong capabilities in natural language understanding and generation. However, LLMs still suffer from limitations such as hallucinations, outdated knowledge, and lack of access to external domain-specific data.
 
-\renewcommand{\labelitemi}{\large$\bullet$}
+To overcome these issues, Retrieval-Augmented Generation (RAG) integrates external knowledge sources into the generation process, allowing models to retrieve relevant information before generating responses. This improves factual accuracy and reduces hallucinations.
+
+In this context, the Ask-Jade system leverages these technologies to build an intelligent question-answering solution for enterprise document analysis.
+
+This chapter presents the theoretical foundations of Large Language Models, Retrieval-Augmented Generation architectures, embedding models, and evaluation methods.
+
+%-------------------------------------------------------------
+\section{Large Language Model}
+%-------------------------------------------------------------
+
+In this section, we discuss Large Language Models (LLMs), covering their
+definition, history, types, training phases, common applications,
+and their limitations.
+
+%-------------------------------------------------------------
+\subsection{Presentation of LLM}
+%-------------------------------------------------------------
+
+Large Language Models (LLMs) are AI systems based on deep neural networks
+trained on large datasets to understand and generate natural language.
+They use the transformer architecture, which is efficient for processing
+text sequences and capturing context.
+
+The evolution of LLMs started in the 1950s with early NLP systems such as machine translation and ELIZA. It progressed through neural networks and LSTM models in the 1990s, followed by advances like Word2Vec in the 2010s. The introduction of the Transformer architecture in 2017 marked a major breakthrough, leading to models such as BERT. More recently, ChatGPT (2022) significantly accelerated the widespread adoption of LLMs in real-world applications.
+
+LLMs can be categorised into three types: pre-trained models, fine-tuned
+models, and multimodal models. Each type offers advantages depending on
+the desired outcome, as summarised in  \textbf{Table \ref{tab:llm-types}}.
+\begin{table}[H]
+\centering
+\caption{Types of Large Language Models}
+\label{tab:llm-types}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{tabular}{|p{3.5cm}|p{5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Type} & \textbf{Description} & \textbf{Examples} & \textbf{Best For} \\
+\hline
+Pre-trained Models &
+Trained on massive general datasets; understand and generate text
+for a wide range of tasks. &
+GPT-4, LLaMA 2, BLOOM &
+General-purpose NLP tasks \\
+\hline
+
+Fine-tuned Models &
+Built on a pre-trained base and further trained on domain-specific
+data for targeted tasks. &
+Vicuna, CodeGen, fine-tuned BERT &
+Domain-specific tasks (legal, medical, code) \\
+\hline
+
+Multimodal Models &
+Process text, images, audio, and video simultaneously, making them
+significantly more capable. &
+GPT-4V, Gemini, Claude 3 &
+Visual QA, transcription, rich media analysis \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Large Language Models are widely used in various domains due to their
+versatility and ability to process natural language efficiently.
+
 \begin{itemize}
-    \item \textbf{Profile Management:} Users must be able to edit their personal profiles within the system to keep their information up to date.
-
-\item \textbf{Conversation Lifecycle Management:} The system must allow consultants to manage their inquiries through a dedicated interface. This includes the ability to start a new conversation, view their historical interactions, update ongoing discussions, and delete conversations that are no longer needed.
-
-\item \textbf{Natural Language Interaction:} The core of the system allows consultants to ask natural language questions. The "Ask-Jade" actor is responsible for processing these queries and responding to questions accurately.
-
-\item \textbf{Comprehensive Document Management:} The system must provide a robust "Manage Documents" module. This includes the ability for authorized users to upload new documents , archive outdated materials, delete documents, and restore previously archived or deleted documents when necessary.
-
-\item \textbf{Metadata Validation and Correction:} Beyond automated ingestion, the system must allow Document Managers to "Manage Metadata". This includes displaying extracted information and providing tools to validate, correct, or complete document metadata to ensure high-accuracy retrieval.
-
-\item \textbf{User Account Administration:} The Administrator must have full control over the user base through a "Manage User Accounts" feature. This includes the ability to add new users, update existing account details, delete users, and archive user profiles.
-
-\item \textbf{System Auditing and Logging:} The system must automatically generate activity logs. These logs must be accessible to administrators for security auditing and system monitoring.
-
-\item \textbf{Performance Analytics:} To support continuous improvement, the system must allow for the analysis of user questions and retrieval performance through a dedicated "View Questions Analytics" dashboard.
-
-\item \textbf{Model Management:} The Administrator must be able to manage and configure the language models (LLMs) used by the system. This includes selecting the active model for response generation, switching between different models based on performance or cost, and defining default model settings for the Ask-Jade system.
-
+  \item \textbf{Chatbots and Virtual Assistants:} LLMs are used to build
+        intelligent conversational agents capable of interacting with users
+        in natural language.
+  \item \textbf{Text Generation:} Automatic generation of articles, reports,
+        and summaries.
+  \item \textbf{Machine Translation:} Translating text between multiple
+        languages with high accuracy.
+  \item \textbf{Code Generation:} Assisting developers by generating and
+        explaining code.
+  \item \textbf{Information Retrieval:} Enhancing search engines by
+        understanding user queries semantically.
 \end{itemize}
 
+While LLMs offer broad capabilities, selecting the right model for a
+specific application requires a structured comparison. The following
+subsection examines the most relevant models and the criteria used
+to guide this choice.
 
-\subsection{Non-Functional Needs}
-The system must satisfy non-functional requirements that, while not part of its core functionality, are essential for ensuring quality and smooth operation.
-\begin{itemize}
-    \item \textbf{Ergonomics:} The system must provide a user-friendly and intuitive interface, allowing even inexperienced users to easily navigate and access its features without requiring special training.
-    
-    \item \textbf{Performance:} The system should be optimized to ensure fast response times and efficient processing of requests, minimizing latency and improving resource usage.
-    
-    \item \textbf{Reliability:} The system must be highly reliable, ensuring minimal downtime and consistent delivery of accurate results, with contextual awareness of the PPP project.
-    
-    \item \textbf{Scalability:} The system should be scalable, capable of adapting to increasing user demands and future growth without performance degradation.
-    
-    \item \textbf{Security:} The system must implement strong security measures to protect sensitive data, prevent unauthorized access, and comply with industry standards.
+
+\subsection{The Most Popular Large Language Models (LLMs)}
+
+The ecosystem of Large Language Models has developed quickly in recent years,
+with several organisations offering powerful models accessible through APIs.
+These models are widely adopted in real-world applications due to their
+scalability, high performance, and ease of integration into intelligent
+systems such as chatbots and Retrieval-Augmented Generation (RAG) applications.
+
+\textbf{Table \ref{tab:llm_popular}} presents some of the most widely used API-based
+Large Language Models and their main strengths.
+
+\begin{table}[H]
+\centering
+\caption{Popular API-based Large Language Models}
+\label{tab:llm_popular}
+\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{5cm}|}
+\hline
+\textbf{Model} & \textbf{Provider} & \textbf{Type} & \textbf{Key Strengths} \\
+\hline
+
+GPT-5.4 mini & OpenAI & Multimodal &
+High accuracy, strong reasoning, excellent for RAG and complex queries \cite{openai} \\
+\hline
+
+Claude Sonnet 4.6 & Anthropic & Multimodal &
+Long context window, safe outputs, strong reasoning and document analysis \cite{anthropic} \\
+\hline
+
+Gemini 1.5 Pro & Google & Multimodal &
+Very large context window (up to 1M tokens), ideal for long documents \cite{google_gemini} \\
+\hline
+
+Mistral Large & Mistral AI & Text-based &
+Fast, cost-efficient, strong performance in structured tasks \cite{mistral} \\
+\hline
+
+LLaMA 3 (API via providers) & Meta / Groq / Together AI & Text-based &
+Open ecosystem, flexible deployment, good balance between performance and cost \cite{llama3} \\
+\hline
+
+\end{tabular}
+\end{table}
+
+The large variety of available LLMs makes model selection a challenging task.
+Therefore, defining clear evaluation criteria is essential to identify the
+most suitable model for the target application.
+
+%-------------------------------------------------------------
+
+
+Choosing the right Large Language Model means selecting the model that best
+satisfies the technical, functional, and operational requirements of the system.
+\textbf{Table~\ref{tab:llm_criteria}} presents the main criteria that can be used to
+guide the selection of an appropriate LLM.
+
+\begin{table}[H]
+\centering
+\caption{LLM Selection Criteria}
+\label{tab:llm_criteria}
+\begin{tabular}{|p{5cm}|p{9cm}|}
+\hline
+\textbf{Criteria} & \textbf{Description} \\
+\hline
+
+Accuracy \& Reliability &
+Hallucination rate, citation precision, contextual fidelity,
+numerical accuracy \\
+\hline
+
+Context Window &
+Maximum tokens supported and long-context understanding \\
+\hline
+
+Multilingual Capability &
+Support for French, English, Arabic, and multilingual reasoning \\
+\hline
+
+Domain Expertise &
+Knowledge of PPP, infrastructure finance, contract law,
+and financial modelling \\
+\hline
+
+Cost Efficiency &
+API pricing, caching, and operational cost optimisation \\
+\hline
+
+Latency \& Performance &
+Response speed, throughput, and interaction fluidity \\
+\hline
+
+Tool Use &
+Support for function calling and external tool integration \\
+\hline
+
+Safety \& Compliance &
+GDPR compliance, content filtering, and secure enterprise usage \\
+\hline
+
+\end{tabular}
+\end{table}
+
+
+%-------------------------------------------------------------
+\subsection{Limitations of Large Language Models}
+%-------------------------------------------------------------
+Despite their advanced capabilities, Large Language Models still present several limitations in real-world applications.
+\begin{itemize}[noitemsep, topsep=2pt]
+  \item \textbf{Hallucinations:} LLMs can generate incorrect or misleading information that is not grounded in source documents.
+  \item \textbf{Outdated Knowledge:} They rely on static training data and cannot access recent information without external sources.
+  \item \textbf{Limited Domain Accuracy:} In specialised fields such as finance or law, responses may lack precision.
+  \item \textbf{Context Limitations:} Very large documents can reduce response quality and coherence.
+  \item \textbf{Privacy Concerns:} Using confidential enterprise data may raise security and compliance issues.
 \end{itemize}
 
+These limitations highlight that standalone LLMs are not always sufficient for enterprise environments. To address these challenges, Retrieval-Augmented Generation (RAG) has emerged as an effective approach that combines LLMs with external knowledge sources to improve the accuracy and reliability of generated responses.
+
+%-------------------------------------------------------------
+\section{Retrieval-Augmented Generation (RAG)}
+%-------------------------------------------------------------
+
+Retrieval-Augmented Generation is a solution to the limitations of LLMs.
+In this section, we discuss its definition, pipeline, use cases, and the
+benefits of using RAG in conversational AI systems.
+
+%-------------------------------------------------------------
+\subsection{Presentation of RAG}
+%-------------------------------------------------------------
+
+Retrieval-Augmented Generation (RAG) is an architecture designed to improve
+Artificial Intelligence models by connecting them to external knowledge
+sources. It helps Large Language Models deliver more relevant and higher
+quality answers by grounding their responses in retrieved information rather
+than relying solely on their training data.
+
+\textbf{Figure~\ref{fig:rag_pipeline}}~\cite{rag_pipeline_image} illustrates the RAG pipeline,
+which retrieves relevant information used by LLMs to generate accurate responses.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{RAG_workflow.png}
+\caption{Basic RAG pipeline~\cite{rag_pipeline_image}}
+\label{fig:rag_pipeline}
+\end{figure}
+
+The RAG pipeline explains how LLMs generate accurate answers using external knowledge sources. The process begins with collecting documents from various sources, forming a comprehensive knowledge base. Once gathered, the data is divided into smaller segments called chunks, allowing efficient processing and retrieval. Each chunk is then converted into a numerical representation called an embedding, which transforms text into vectors stored in a vector database.
+When a user submits a query, the system converts it into a vector using the same embedding process and retrieves the most relevant chunks. These chunks are combined into a context passed alongside the user query to the LLM, enabling it to produce responses that are more accurate, coherent, and less prone to hallucinations. A critical factor in this process is the choice of the embedding model, as it directly influences the quality of vector representations and, consequently, the relevance of retrieved chunks. Selecting an appropriate embedding model is therefore essential to the overall performance of the RAG system.
 
 
-\subsection{Identification of Actors}
-Before defining the functional requirements, it is essential to identify the actors who interact with the system. An actor represents a role played by a user or an external system that exchanges information with Ask-Jade.
+
+RAG techniques are versatile and have been applied across multiple real-world domains. Their main advantages are the following:
 
 \begin{itemize}
-\item \textbf{Consultant:} The primary end-user of the platform. This actor interacts with the system to ask natural language questions, manage their conversation history, and update their personal profile.
-\item \textbf{Document Manager:} A specialized user responsible for the quality of the knowledge base. Their role includes uploading documents and, most importantly, managing, validating, and correcting metadata to ensure high-accuracy retrieval.
-
-\item \textbf{Administrator:} The user in charge of system governance. This role manages user accounts (adding, updating, or deleting users), monitors system security through audit logs, and configures the active language model used by the system.
-
-\item \textbf{Ask-Jade (System Actor):} Represented as an intelligent agent that processes user queries and generates context-aware responses based on the indexed document library.
-
-\item \textbf{System (Technical Actor):} An internal actor responsible for automated background tasks, history, such as generating logs and maintaining the document management lifecycle.
+  \item \textbf{Dynamic information:} RAG enables LLMs to access up-to-date external knowledge for more accurate responses.
+  
+  \item \textbf{Reduced errors:} It reduces hallucinations by grounding outputs in relevant retrieved context.
+  
+  \item \textbf{Efficiency:} RAG avoids costly retraining by using indexed data stored in vector databases.
+  
+  \item \textbf{Source attribution:} It improves transparency by providing references to retrieved information.
+  
+  \item \textbf{Scalability:} It can easily adapt to new domains by extending the knowledge base.
 \end{itemize}
 
-\subsection{Use Case Diagram}
-Figure \textbf{31} illustrates the main use cases of the system.
-\newpage
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=0.9\textwidth]{ask-jade-use-case.jpg}
-    \caption{Use Case Diagram}
-\end{figure}
+Building a RAG system requires choosing the right orchestration framework.
+The following subsection compares the two main options considered for
+Ask-Jade.
 
-
-\subsection{Use Case Refinement}
-
-The following subsections present the detailed refinement of the main use cases identified in the system, describing the actors, scenarios, preconditions, postconditions, and possible exceptions associated with each functionality.
-
-\subsubsection{a- Manage Users}
-
-This figure presents the use case diagram of Manage Users:
-
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=\textwidth]{Manage Users.png}
-    \caption{Use Case Diagram of Manage Users}
-\end{figure}
+%-------------------------------------------------------------
+\subsection{The Most Popular RAG Frameworks}
+%-------------------------------------------------------------
+LlamaIndex \cite{llamaindex} and LangChain \cite{langchain} are two popular frameworks used to build
+applications based on Large Language Models, especially RAG systems.
+LlamaIndex is mainly focused on document indexing and information retrieval,
+making it well suited for search-oriented and knowledge-based systems.
+In contrast, LangChain is more adapted to building complex pipelines,
+agents, and conversational chatbots through its large ecosystem of tools
+and integrations. An important advantage of LlamaIndex is its compatibility
+with LangChain modules and document processing tools such as Docling,
+allowing the development of efficient and scalable RAG applications.
+\textbf{Table~\ref{tab:llama_langchain}} compares the main characteristics,
+advantages, and limitations of both frameworks.
 
 \begin{table}[H]
 \centering
-\caption{Refinement of the Use Case Manage Users}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
+\caption{Feature Comparison: LlamaIndex vs.\ LangChain}
+\label{tab:llama_langchain}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{4cm}|p{5.5cm}|p{5.5cm}|}
 \hline
-\textbf{Use Case} & Manage Users \\ \hline
-\textbf{Actor} & Administrator \\ \hline
-\textbf{Precondition} & System is running, administrator is authenticated. \\ \hline
-\textbf{Postcondition} & Users are successfully managed (created, updated, archived, restored, or deleted). \\ \hline
-\textbf{Main Scenario} &
-The administrator accesses the Users section. The system displays the list of registered users with their roles, status, and creation date. \\ \hline
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The administrator searches or filters users by name, email, or role.\newline
-The administrator selects \textbf{Add User}:\newline
-\hspace*{0.2cm}-- The system displays the invitation form.\newline
-\hspace*{0.2cm}-- The administrator fills in the required fields and confirms.\newline
-\hspace*{0.2cm}-- The system sends an activation email and marks the user as Pending.\newline
-The administrator chooses to \textbf{edit} a user:\newline
-\hspace*{0.2cm}-- The system displays the update form.\newline
-\hspace*{0.2cm}-- The administrator modifies the profile information and confirms.\newline
-The administrator chooses to \textbf{archive} a user:\newline
-\hspace*{0.2cm}-- The system archives the user, who remains visible with reduced opacity.\newline
-The administrator chooses to \textbf{restore} an archived user:\newline
-\hspace*{0.2cm}-- The system restores the user.\newline
-The administrator chooses to \textbf{delete} a user:\newline
-\hspace*{0.2cm}-- The system permanently deletes the user after confirmation.\newline
-The administrator triggers a \textbf{refresh} to reload the user list.
-}\\ \hline
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If not authenticated, the system redirects to the login page.\newline
--- If users cannot be retrieved, an error message is displayed.\newline
--- If a required field is missing, the system displays a validation error.\newline
--- If the email already exists, the user creation is rejected.
-}\\ \hline
-\end{tabular}
-\end{table}
-
-
-\subsubsection{b- Authenticate }
-
-This figure presents the use case diagram of Authenticate User:
-
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=0.55\textwidth]{authenticate.jpg}
-    \caption{Use Case Diagram of Authenticate}
-\end{figure}
-
-
-\begin{table}[H]
-\centering
-\caption{Refinement of the Use Case Authenticate}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
+\textbf{Feature / Aspect} & \textbf{LlamaIndex} & \textbf{LangChain} \\
 \hline
 
-\textbf{Use Case} & Authenticate \\ \hline
-\textbf{Actor} & Administrator, Consultant, Document Manager \\ \hline
-\textbf{Precondition} & System is running. \\ \hline
-\textbf{Postcondition} & User is successfully authenticated and redirected to the dashboard. \\ \hline
+Overview &
+A platform for structured document indexing and semantic retrieval,
+designed for precise information access. &
+A versatile framework for constructing LLM-based pipelines and
+connecting external data sources. \\
+\hline
 
-\textbf{Main Scenario} &
-The system displays the authentication interface. \\ \hline
+Advantages &
+Fast indexing, handles large-scale datasets, native Docling integration,
+and optimised for document workflows. &
+Supports multi-step workflows, easy LangSmith integration,
+and strong community support. \\
+\hline
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user enters their credentials and optionally activates \textbf{Remember Me}.\newline
-The user selects \textbf{Sign In}:\newline
-\hspace*{0.2cm}-- The system verifies the credentials and redirects to the dashboard.\newline
-The user selects \textbf{Forgot your password?}:\newline
-\hspace*{0.2cm}-- The user submits their email address.\newline
-\hspace*{0.2cm}-- The system sends a password reset link by email.\newline
-The user follows the reset link:\newline
-\hspace*{0.2cm}-- The user enters and confirms the new password.\newline
-\hspace*{0.2cm}-- The system updates the password and redirects to the sign in page.
-}\\ \hline
-
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If credentials are incorrect, an error message is displayed.\newline
--- If the account is locked after multiple failed attempts, a temporary lock message is displayed.\newline
--- If passwords do not match during reset, an error message is displayed.
-}\\ \hline
+Limitations &
+Mainly focused on retrieval; less suitable for complex multi-step
+tool chaining. &
+Steeper learning curve and heavier configuration for simple
+document-centric tasks. \\
+\hline
 
 \end{tabular}
 \end{table}
 
-\subsubsection{c- Edit Profile}
+Based on this comparison, the orchestration framework selection is carried
+out in Chapter~4. Beyond the framework choice, the quality of a RAG system
+depends heavily on the embedding model used to represent documents and queries.
+The following subsection presents the available options.
 
-This figure presents the use case diagram of Edit Profile:
+%-------------------------------------------------------------
+\subsection{Embedding Model for RAG}
+%-------------------------------------------------------------
 
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=0.55\textwidth]{Edit profile.jpg}
-    \caption{Use Case Diagram of Edit profile}
-\end{figure}
+Embedding models play a critical role in RAG systems, as they directly influence the quality of semantic retrieval and the relevance of generated responses. This subsection presents the most commonly used embedding models and the criteria considered for selecting the most suitable one for the Ask-Jade system.
+
+Embedding models are essential components in RAG systems. Their role is to
+transform documents and user queries into dense vector representations that
+capture semantic meaning, enabling efficient similarity search and accurate
+retrieval of relevant information from large document collections.
+\textbf{Table~\ref{tab:embedding_popular}} summarises some of the most commonly used
+embedding models for RAG systems.
 
 \begin{table}[H]
 \centering
-\caption{Refinement of the Use Case Edit Profile}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
+\caption{Popular Embedding Models for RAG Systems}
+\label{tab:embedding_popular}
+\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{5cm}|}
+\hline
+\textbf{Embedding Model} & \textbf{Provider} & \textbf{Type}
+& \textbf{Key Strengths} \\
 \hline
 
-\textbf{Use Case} & Edit Profile \\ \hline
-\textbf{Actor} & Administrator, Consultant, Document Manager \\ \hline
-\textbf{Precondition} & User is authenticated and connected to the system. \\ \hline
-\textbf{Postcondition} & User profile or password is successfully updated. \\ \hline
+text-embedding-3-large~\cite{openai} &
+OpenAI &
+Dense Embedding &
+High retrieval accuracy, strong multilingual support,
+optimised for semantic search \\
+\hline
 
-\textbf{Main Scenario} &
-The user accesses the profile menu from the header. The system displays a dropdown with available options. \\ \hline
+BGE-M3~\cite{bge_m3} &
+BAAI &
+Hybrid / Multilingual &
+Supports dense, sparse, and multi-vector retrieval with excellent
+multilingual performance \\
+\hline
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user selects \textbf{Edit Profile}:\newline
-\hspace*{0.2cm}-- The user updates the required fields and confirms.\newline
-\hspace*{0.2cm}-- The system validates and saves the profile successfully.\newline
-The user selects \textbf{Edit Password}:\newline
-\hspace*{0.2cm}-- The user enters the current password, then the new password and its confirmation.\newline
-\hspace*{0.2cm}-- The system verifies and updates the password successfully.
-}\\ \hline
-
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If required fields are empty, a validation error is displayed.\newline
--- If the current password is incorrect, an error message is displayed.\newline
--- If the new password and confirmation do not match, an error message is displayed.\newline
--- If a server error occurs, an error message is displayed.
-}\\ \hline
+E5-large-v2~\cite{e5_microsoft} &
+Microsoft &
+Dense Embedding &
+Strong semantic similarity and efficient retrieval for general-purpose
+RAG systems \\
+\hline
 
 \end{tabular}
 \end{table}
 
-
-
-
-
-\subsubsection{d- Ask Questions}
-
-This figure presents the use case diagram of Ask Questions:
-
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=0.8\textwidth]{ask questions.jpg}
-    \caption{Use Case Diagram of Ask Questions}
-\end{figure}
+Choosing the right embedding model means selecting the model that best
+satisfies the semantic retrieval requirements, multilingual capabilities,
+and scalability constraints of the system. \textbf{Table~\ref{tab:embedding_criteria}}
+presents the main criteria used in this comparative study, which will 
+guide the selection of the most suitable embedding model for the 
+Ask-Jade system.
 
 \begin{table}[H]
 \centering
-\caption{Refinement of the Use Case Ask Questions}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
+\caption{Embedding Model Selection Criteria}
+\label{tab:embedding_criteria}
+\begin{tabular}{|p{5cm}|p{9cm}|}
+\hline
+\textbf{Criteria} & \textbf{Description} \\
 \hline
 
-\textbf{Use Case} & Ask Questions \\ \hline
-\textbf{Actor} & Administrator, Consultant, Document Manager \\ \hline
-\textbf{Precondition} & User is authenticated and has access to the chat interface. \\ \hline
-\textbf{Postcondition} & The system provides an answer to the user's question. \\ \hline
+Retrieval Accuracy &
+Ability to capture semantic similarity and retrieve the most relevant
+documents \\
+\hline
 
-\textbf{Main Scenario} &
-The system displays the chat interface. \\ \hline
+Multilingual Capability &
+Support for multiple languages such as English, French, and Arabic \\
+\hline
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user enters a question and submits it:\newline
-\hspace*{0.2cm}-- The system processes the request and displays the generated response.\newline
-\hspace*{0.2cm}-- The system displays sources related to the answer.
-}\\ \hline
+Domain Adaptability &
+Capability to represent technical, legal, financial, or domain-specific
+terminology accurately \\
+\hline
 
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If the message is empty, the request is not submitted.\newline
--- If an error occurs, an error message is displayed.
-}\\ \hline
+Scalability &
+Efficiency when handling large document collections and high query volumes \\
+\hline
+
+Embedding Type &
+Support for dense, sparse, or hybrid embeddings depending on retrieval
+strategy \\
+\hline
+
+Performance \& Efficiency &
+Computation speed, memory usage, and inference cost for real-time
+applications \\
+\hline
+
+Integration Compatibility &
+Ease of integration with vector databases, LlamaIndex, and RAG pipelines \\
+\hline
 
 \end{tabular}
 \end{table}
 
+Based on these criteria, the embedding model selection 
+is carried out in Chapter~4.
 
 
 
-\subsubsection{e- Manage Conversations}
 
-This figure presents the use case diagram of Manage Conversations:
+%-------------------------------------------------------------
+\section{Evaluation Framework}
+\label{sec:eval_framework}
+%-------------------------------------------------------------
 
-\begin{figure}[H]
-    \centering
-     \includegraphics[width=\textwidth]{Manage Conversation.jpg}
-    \caption{Use Case Diagram of Manage Conversations}
-\end{figure}
+Evaluating a RAG system requires dedicated metrics that measure both
+retrieval and generation performance. In Ask-Jade, evaluation is performed
+using two complementary approaches: Expert Evaluation on a
+curated benchmark dataset, and the LLM-as-a-Judge paradigm,
+with all metrics tracked through Langfuse~\cite{langfuse}.
+
+
+%-------------------------------------------------------------
+\subsection{Expert Evaluation}
+\label{sec:expert_eval}
+Expert evaluation relies on a curated benchmark dataset constructed and
+validated by domain specialists. Each entry in the dataset consists of
+a representative question drawn from real consultant use cases, a
+reference answer validated by a domain expert, and a score reflecting
+the expected quality threshold for that question.
+
+System responses are assessed by comparing them against these reference
+answers using a structured scoring rubric, which ensures that evaluation
+remains objective and reproducible across evaluators.
+
+%-------------------------------------------------------------
+\subsection{LLM-as-a-Judge}
+\label{sec:llm_as_judge}
+%-------------------------------------------------------------
+LLM-as-a-Judge is an evaluation method where a Large Language Model is used as an automatic evaluator of generated answers. Instead of relying on exact matching, it assesses responses based on semantic criteria such as relevance, coherence, faithfulness, and factual accuracy. This approach overcomes the limitations of human evaluation by enabling scalable, low-cost assessment of large datasets while maintaining strong alignment with human judgment.
+
+
+The judge LLM evaluates each case based on a structured input prompt composed of several key components:
+
+\begin{enumerate}
+  \item The \textbf{user query} the original question submitted
+        by the user.
+  \item The \textbf{retrieved context} the document chunks surfaced
+        by the retrieval pipeline.
+  \item The \textbf{generated answer} the response produced by the
+        system under evaluation.
+  \item An \textbf{evaluation rubric} explicit scoring criteria
+        and instructions that define what constitutes a good or poor
+        response.
+\end{enumerate}
+
+
+\textbf{Table~\ref{tab:eval_comparison}} summarises and compares the main
+advantages and limitations of both evaluation approaches.
 
 \begin{table}[H]
 \centering
-\caption{Refinement of the Use Case Manage Conversations}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
+\caption{Advantages and Limitations of Expert Evaluation and LLM-as-a-Judge}
+\label{tab:eval_comparison}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{} & \textbf{Advantages} & \textbf{Limitations} \\
 \hline
 
-\textbf{Use Case} & Manage Conversations \\ \hline
-\textbf{Actor} & Administrator, Consultant, Document Manager \\ \hline
-\textbf{Precondition} & User is authenticated. \\ \hline
-\textbf{Postcondition} & Conversations are created, viewed, updated, or deleted successfully. \\ \hline
+\textbf{Expert Evaluation} &
+High reliability and reproducibility. Detects domain-specific errors. Provides interpretable, justified scores. &
+Low scalability and high cost. Inter-annotator disagreement possible. Static dataset requiring manual updates. \\
+\hline
 
-\textbf{Main Scenario} &
-The system displays the list of conversations. \\ \hline
-
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user initiates a \textbf{New Conversation}:\newline
-\hspace*{0.2cm}-- The system creates and adds it to the list.\newline
-The user selects a \textbf{conversation} to view its content.\newline
-The user searches for a conversation by title or preview.\newline
-The user chooses to \textbf{edit} a conversation title:\newline
-\hspace*{0.2cm}-- The user modifies the title and the system saves it.\newline
-The user chooses to \textbf{delete} a conversation:\newline
-\hspace*{0.2cm}-- The system requests confirmation before deletion.
-}\\ \hline
-
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If no conversation exists, an empty state is displayed.\newline
--- If an error occurs while loading, an error message is displayed.
-}\\ \hline
+\textbf{LLM-as-a-Judge} &
+High scalability and flexibility. Strong correlation with human judgement. Evaluates meaning over surface form. &
+Subject to model and positional bias. Non-deterministic scores. Cannot reliably detect domain-specific factual errors. \\
+\hline
 
 \end{tabular}
 \end{table}
@@ -315,236 +494,219 @@ The user chooses to \textbf{delete} a conversation:\newline
 
 
 
+%\subsection{Discussion}
+
+%As shown in \textbf{Table~\ref{tab:eval_comparison}}, the two approaches exhibit
+%complementary strength and weakness profiles. Expert evaluation provides
+%a reliable ground truth but cannot scale to the volume of queries
+%required for continuous system monitoring. LLM-as-a-Judge, while subject
+%to certain biases, offers the automation and flexibility needed to
+%evaluate RAG outputs at scale. In Ask-Jade, both approaches are therefore
+%combined: expert evaluation is used to validate the system on a curated
+%benchmark dataset, while LLM-as-a-Judge handles ongoing evaluation
+%across a broader set of queries.
+
+
+
+
+%-------------------------------------------------------------
+\subsection{Retrieval Metrics}
+%-------------------------------------------------------------
+The following subsections introduce the metrics used to evaluate the quality of the retrieved context in terms of relevance, completeness, and factual correctness. A consolidated summary of all metrics and their target thresholds
+is provided in Appendix~\ref{annexe:eval_metrics}.
 
-\subsubsection{f- Manage Documents}
+\subsubsection{a- Context Relevance}
+
+Context Relevance measures whether the retrieved chunks are useful for
+answering the user query. A high score indicates that the retrieved
+context contains mostly relevant information, with little noise.
+The context relevance equation can be found at equation~\ref{eq:context_relevance}.
+
+\begin{equation}
+\text{Context Relevance} =
+\frac{\text{Number of relevant retrieved sentences}}
+     {\text{Total number of retrieved sentences}}
+\label{eq:context_relevance}
+\end{equation}
+
+\textbf{Range:} $[0,\,1]$. A score close to 1 means the retriever
+returns highly focused and pertinent content. A low score indicates
+that the retrieved context contains too much irrelevant information.
+
+%-------------------------------------------------------------
 
-This figure presents the use case diagram of Manage Documents:
+\subsubsection{b- Context Recall}
+
+Context Recall measures the completeness of the retrieval: whether the
+system successfully finds all the information needed to generate a
+correct answer. The context recall equation can be found at equation
+~\ref{eq:context_recall}.
+
+\begin{equation}
+\text{Context Recall} =
+\frac{\text{Relevant information successfully retrieved}}
+     {\text{Total relevant information that should be retrieved}}
+\label{eq:context_recall}
+\end{equation}
+
+\textbf{Range:} $[0,\,1]$. A low score indicates that important
+information is missing from the retrieved context, which may lead to
+incomplete or inaccurate answers.
+
+%-------------------------------------------------------------
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{Manage Documents.jpg}
-    \caption{Use Case Diagram of Manage Documents}
-\end{figure}
+\subsubsection{c- Context Correctness}
+
+Context Correctness evaluates whether the retrieved context is not only
+complete but also factually accurate and correctly aligned with the
+ground truth. Unlike Context Recall, which measures coverage, Context
+Correctness penalises cases where retrieved chunks contain misleading
+or incorrect information, even if they are topically relevant.
+The context correctness equation can be found at equation ~\ref{eq:context_correctness}.
+
+\begin{equation}
+\text{Context Correctness} =
+\frac{\text{Number of correctly retrieved and factually accurate chunks}}
+     {\text{Total number of retrieved chunks}}
+\label{eq:context_correctness}
+\end{equation}
+
+\textbf{Range:} $[0,\,1]$. A high score confirms that the retrieved
+context is both relevant and factually reliable, providing a solid
+foundation for accurate answer generation.
+
+With retrieval quality defined, the following subsection introduces the
+metrics used to evaluate the generation stage.
+
+%-------------------------------------------------------------
+\subsection{Generation Metrics}
+%-------------------------------------------------------------
+
+This subsection introduces the set of metrics used to assess the quality
+of the generated answers with respect to user intent, factual consistency,
+and response usefulness. A consolidated summary of all metrics and their target thresholds
+is provided in Appendix~\ref{annexe:eval_metrics}.
+
+\subsubsection{a- Relevance}
+
+Relevance measures the overall semantic alignment between the generated
+answer and the user's query, independently of any reference answer.
+It assesses whether the response directly and appropriately addresses
+the intent behind the question.
+The relevance equation can be found at equation~\ref{eq:relevance}.
+
+\begin{equation}
+\text{Relevance} =
+\cos\!\left(\mathbf{q},\, \mathbf{a}\right)
+\label{eq:relevance}
+\end{equation}
 
-\begin{table}[H]
-\centering
-\caption{Refinement of the Use Case Manage Documents}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
-\hline
+where $\mathbf{q}$ is the embedding of the user query and $\mathbf{a}$
+is the embedding of the generated answer.
 
-\textbf{Use Case} & Manage Documents \\ \hline
-\textbf{Actor} & Administrator, Document Manager \\ \hline
-\textbf{Precondition} & User is authenticated. \\ \hline
-\textbf{Postcondition} & Documents are uploaded, archived, restored, or deleted successfully. \\ \hline
+\textbf{Range:} $[0,\,1]$. A high score indicates that the answer is
+semantically close to the query and directly addresses the user's intent.
 
-\textbf{Main Scenario} &
-The system displays the list of documents. \\ \hline
+%-------------------------------------------------------------
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user initiates an \textbf{Upload Document}:\newline
-\hspace*{0.2cm}-- The system processes the file and adds it to the list.\newline
-The user chooses to \textbf{archive} a document:\newline
-\hspace*{0.2cm}-- The system archives the selected document.\newline
-The user chooses to \textbf{restore} an archived document:\newline
-\hspace*{0.2cm}-- The system restores it.\newline
-The user chooses to \textbf{delete} a document:\newline
-\hspace*{0.2cm}-- The system requests confirmation before deletion.
-}\\ \hline
-
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If no document exists, an empty state is displayed.\newline
--- If an error occurs during upload or processing, an error message is displayed.\newline
--- If deletion fails, the user is notified.
-}\\ \hline
-
-\end{tabular}
-\end{table}
-
-
-
-
-\subsubsection{g- Manage Metadata}
-
-This figure presents the use case diagram of Manage Metadata:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{Manage Metadata.jpg}
-    \caption{Use Case Diagram of Manage Metadata}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Refinement of the Use Case Manage Metadata}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
-\hline
-
-\textbf{Use Case} & Manage Metadata \\ \hline
-\textbf{Actor} & Administrator, Document Manager \\ \hline
-\textbf{Precondition} & Document is uploaded and processed. \\ \hline
-\textbf{Postcondition} & Metadata is completed, corrected, and validated successfully. \\ \hline
-
-\textbf{Main Scenario} &
-The system displays the extracted metadata of the document. \\ \hline
-
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The system automatically extracts metadata after upload.\newline
-The user completes any missing fields such as author, type, or language.\newline
-The user chooses to \textbf{correct} metadata:\newline
-\hspace*{0.2cm}-- The user modifies incorrect fields and the system updates them.\newline
-The user chooses to \textbf{validate} metadata:\newline
-\hspace*{0.2cm}-- The user selects a project and the system saves the metadata.
-}\\ \hline
-
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If extraction fails, manual input is allowed.\newline
--- If required fields are missing, validation is prevented.\newline
--- If an error occurs during validation, an error message is displayed.
-}\\ \hline
-
-\end{tabular}
-\end{table}
-
-
-
-
-\subsubsection{h- View Logs}
-
-This figure presents the use case diagram of View Logs:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{view logs.jpg}
-    \caption{Use Case Diagram of View Logs}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Refinement of the Use Case View Logs}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
-\hline
+\subsubsection{b- Faithfulness}
 
-\textbf{Use Case} & View Logs \\ \hline
-\textbf{Actor} & Administrator, Document Manager \\ \hline
-\textbf{Precondition} & User is authenticated and has access to audit logs. \\ \hline
-\textbf{Postcondition} & Logs are displayed, filtered, and optionally exported. \\ \hline
-
-\textbf{Main Scenario} &
-The system displays the list of audit logs. \\ \hline
+Faithfulness checks whether every statement in the generated answer is
+supported by the retrieved context. It measures the factual consistency
+between the answer and its sources, independently of whether the
+context itself is correct.
+The faithfulness equation can be found at equation~\ref{eq:faithfulness}.
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The user filters logs by category (documents, users, system, security).\newline
-The user browses the logs list to view details such as action, user, timestamp, and description.\newline
-The user initiates an \textbf{Export Logs}:\newline
-\hspace*{0.2cm}-- The system generates and downloads the log file.\newline
-The system automatically records each user or system action as a log entry.
-}\\ \hline
+\begin{equation}
+\text{Faithfulness} =
+\frac{\text{Number of statements in the answer supported by the context}}
+     {\text{Total number of statements in the generated answer}}
+\label{eq:faithfulness}
+\end{equation}
 
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If no logs exist, an empty state is displayed.\newline
--- If an error occurs while loading, an error message is displayed.\newline
--- If export fails, the user is notified.
-}\\ \hline
+\textbf{Range:} $[0,\,1]$. A score of 1 means the answer is entirely
+grounded in the retrieved documents with no unsupported claims.
+A low score indicates that the model introduces information not present
+in the context.
 
-\end{tabular}
-\end{table}
+%-------------------------------------------------------------
 
-\subsubsection{i- View Analytics}
+\subsubsection{c- Hallucination}
 
-This figure presents the use case diagram of View Analytics:
+Hallucination is defined as the complement of Faithfulness. It quantifies
+the proportion of generated statements that cannot be verified in the
+retrieved context, and therefore may represent fabricated or misleading
+information. The hallucination equation can be found at
+~\ref{eq:hallucination}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{view analytics questions.jpg}
-    \caption{Use Case Diagram of View Analytics}
-\end{figure}
+\begin{equation}
+\text{Hallucination} = 1 - \text{Faithfulness}
+\label{eq:hallucination}
+\end{equation}
 
-\begin{table}[H]
-\centering
-\caption{Refinement of the Use Case View Analytics}
-\begin{tabular}{|>{\centering\arraybackslash}p{4cm}|p{10cm}|}
-\hline
+\textbf{Range:} $[0,\,1]$. The objective is to minimise this score.
+A high hallucination rate indicates that the model generates information
+that is not grounded in the source documents, which undermines the
+reliability of the system.
 
-\textbf{Use Case} & View Analytics \\ \hline
-\textbf{Actor} & Administrator \\ \hline
-\textbf{Precondition} & User is authenticated and has admin privileges. \\ \hline
-\textbf{Postcondition} & Analytics data is displayed and interpreted successfully. \\ \hline
+%-------------------------------------------------------------
 
-\textbf{Main Scenario} &
-The system displays analytics dashboards including system performance and usage metrics. \\ \hline
+\subsubsection{d- Answer Correctness}
 
-\textbf{Alternative Scenarios} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
-The system displays \textbf{system performance metrics} such as response time, uptime, and health indicators.\newline
-The system displays \textbf{model performance} including response accuracy and number of processed queries.\newline
-The system displays \textbf{most asked questions} and \textbf{usage statistics} such as active users and interactions.\newline
-The system displays \textbf{user feedback} including ratings and comments on system responses.\newline
-The user initiates an \textbf{Export Report}:\newline
-\hspace*{0.2cm}-- The system generates and downloads the analytics report.
-}\\ \hline
+Answer Correctness evaluates the overall quality of the generated answer
+by comparing it to a reference answer. It combines two complementary
+measures: factual overlap, computed using the F1 score at the token level,
+and semantic similarity, computed using the cosine similarity of the
+answer embeddings. The answer correctness equation can be found at ~\ref{eq:answer_correctness}.
 
-\textbf{Exception Scenario} &
-\parbox[t]{10cm}{\small\setlength{\parskip}{1pt}
--- If no analytics data is available, an empty state is displayed.\newline
--- If an error occurs while loading, an error message is displayed.\newline
--- If charts fail to load, placeholders are displayed.
-}\\ \hline
+\begin{equation}
+\text{Answer Correctness} =
+w_1 \cdot F_1\!\left(a,\, a^{*}\right) +
+w_2 \cdot \cos\!\left(\mathbf{a},\, \mathbf{a}^{*}\right)
+\label{eq:answer_correctness}
+\end{equation}
 
-\end{tabular}
-\end{table}
+where:
+\begin{itemize}
+  \item $a$ is the generated answer and $a^{*}$ is the reference answer,
+  \item $w_1$ and $w_2$ are weighting coefficients
+        (typically $w_1 = w_2 = 0.5$),
+  \item $F_1(a, a^{*})$ measures token-level factual overlap between
+        the generated and reference answers,
+  \item $\cos(\mathbf{a}, \mathbf{a}^{*})$ measures the semantic
+        similarity between the embeddings of the two answers.
+\end{itemize}
 
+\textbf{Range:} $[0,\,1]$. A high score means the generated answer
+is both factually and semantically close to the expected answer.
+A low score may indicate missing facts, incorrect statements,
+or a semantically divergent response.
 
-\section{Conceptual Study}
+%-------------------------------------------------------------
 
-This section presents the architectural and dynamic views of the Ask-Jade
-system through deployment, activity, and sequence diagrams.
+\subsubsection{e- Helpfulness and Conciseness}
 
+Beyond factual accuracy, additional metrics evaluate the practical
+quality of the generated answer. Helpfulness measures whether the answer
+is useful and complete for the user's needs, while Conciseness evaluates
+whether the response is brief and focused without unnecessary information.
+Both metrics are scored in $[0,\,1]$ by the judge LLM.
 
-\subsection{Deployment Diagram}
-Figure \textbf{3.11} illustrates the physical deployment architecture
-of Ask-Jade.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{dep.jpg}
-  \caption{Deployment Diagram of the Ask-Jade System}
-  \label{fig:deployment}
-\end{figure}
 
 
 
 
-\subsection{Ask Question Activity Diagram}
 
-Figure \textbf{3.12} illustrates the activity flow of the RAG pipeline,
-from query processing and retrieval to answer generation.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{activity_ask_question.jpg}
-\caption{Activity Diagram for the Ask Question Use Case}
-\label{fig:activity_ask_question}
-\end{figure}
 
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{activity_document.png}
-    \caption{Sequence Diagram for Manage Documents Use Case}
-    \label{fig:seq_manage_documents}
-\end{figure}
 
 
-
-
-
-
-
-
+\section{Conclusion}
+This chapter has covered the key theoretical foundations underlying the
+Ask-Jade system, from Large Language Models and RAG architectures to
+embedding models and evaluation frameworks. Building on these concepts,
+the next chapter presents the detailed design and implementation of the
+Ask-Jade pipeline.

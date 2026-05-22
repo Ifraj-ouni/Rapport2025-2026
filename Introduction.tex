@@ -1,21 +1,65 @@
-
 \chapter*{General Introduction}
-\markboth{General Introduction}{} %pour afficher l'entete
-\addcontentsline{toc}{chapter}{General introduction}
+\markboth{General Introduction}{}
+\addcontentsline{toc}{chapter}{General Introduction}
 
-In an era marked by rapid technological advancement, artificial intelligence, and exponential data growth, organizations face increasing challenges in transforming information into actionable knowledge. AI-powered systems are reshaping how professionals interact with complex data, enabling faster analysis and more informed decision-making.
+In an era marked by rapid technological advancement and exponential data
+growth, organizations face increasing challenges in transforming information
+into actionable knowledge. AI-powered systems are reshaping how professionals
+interact with complex data, enabling faster analysis and more informed
+decision-making.
 
-Within this evolving landscape, Jade Advisory, a consulting firm specializing in Public-Private Partnerships (PPP), manages a large and diverse portfolio of strategic documents. These documents are essential for project execution and compliance. However, their volume and heterogeneity make information retrieval slow, fragmented, and difficult to standardize.
+Within this evolving landscape, Jade Advisory, a consulting firm
+specializing in Public-Private Partnerships (PPP), manages a large and
+diverse portfolio of strategic documents essential for project execution
+and compliance. However, their growing volume, multilingual nature, and
+heterogeneous formats make information retrieval slow, fragmented, and
+difficult to standardize, limiting knowledge reuse and reducing operational
+efficiency.
 
-Recognizing the value of its institutional knowledge, Jade Advisory identified the need for an intelligent solution to structure and efficiently access its document repository. The lack of such a system limits knowledge reuse and reduces operational efficiency.
+To address this challenge, this project proposes \textbf{Ask-Jade}, a dedicated 
+document management and question-answering system based on a 
+Retrieval-Augmented Generation (RAG) architecture. By focusing on advanced 
+document parsing, structured data ingestion, and semantic indexing, the system 
+transforms Jade Advisory's document library into a central, searchable knowledge 
+base, enabling fast, precise, and context-grounded access to organizational 
+assets.
 
-To address this challenge, this project proposes the development of an intelligent document management system based on a Retrieval-Augmented Generation (RAG) approach. Relying on cutting-edge technologies in artificial intelligence and data engineering, the proposed solution transforms the document repository into a structured and searchable knowledge base, enabling accurate information retrieval and question-answering. By leveraging advanced AI techniques, the system provides fast and context-aware access to organizational knowledge, thereby enhancing productivity and supporting informed decision-making.
+This report has been prepared as part of the end-of-study internship and
+in fulfillment of the requirements for the degree in Software Engineering.
+It is organized into five chapters, reflecting the methodological approach
+followed during its development:
 
-This report has been prepared as part of the end-of-study internship and in fulfillment of the requirements for the degree in Software Engineering. It is organized into five chapters, reflecting the methodological approach followed during its development :
 \begin{itemize}
-    \item \textbf{Chapter 1 titled "Project Context" }first presents the host company, then presents the existing, points out its limitations, and finally presents a proposed solution.
-    \item \textbf{Chapter 2 titled "Needs Analysis"} presents the functional needs of the proposed solution and the technical specification including non-functionnal need, Hardware environment, Software environment, used technologies and used libraries.
+
+  \item \textbf{Chapter 1} titled \textbf{``Project Context''} introduces the host
+        company, examines the limitations of existing knowledge management
+        tools, presents the proposed Ask-Jade solution, and describes the
+        document dataset used to build the knowledge base.
+
+  \item \textbf{Chapter 2} titled \textbf{``Needs Analysis and Conceptual Study''}
+        defines the functional and non-functional requirements of Ask-Jade,
+        identifies the system actors, and presents the use case, activity,
+        and sequence diagrams.
+
+  \item \textbf{Chapter 3} titled \textbf{``Generative AI : State of the Art''}
+        presents the key technologies underlying the system, including
+        Large Language Models, the RAG architecture, the BGE-M3 embedding
+        model, and the evaluation approaches adopted in the project,
+        namely expert evaluation and the LLM-as-a-Judge framework..
+
+  \item \textbf{Chapter 4} titled \textbf{``Ask-Jade Pipeline''} details the two
+        core pipelines of the system: the ingestion pipeline, which indexes
+        documents into a vector store, and the retrieval pipeline, which
+        processes user queries through multi-query expansion, RRF fusion,
+        reranking, and grounded answer generation.
+
+  \item \textbf{Chapter 5} titled\textbf{ ``Implementation and Evaluation''}
+        presents the technical environment, the system interfaces for each
+        use case, and the evaluation results obtained through automated
+        LLM-as-a-Judge metrics and expert assessment.
+
 \end{itemize}
 
-
-
+Finally, a general conclusion summarizes the work accomplished, presents
+the key results obtained, and outlines potential future improvements
+to the Ask-Jade system.

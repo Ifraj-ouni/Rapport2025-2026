@@ -168,7 +168,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortlocale</bcf:key>
-      <bcf:value>french</bcf:value>
+      <bcf:value>english</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortingtemplatename</bcf:key>
@@ -2373,29 +2373,46 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">Biblio.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="3" intorder="1">WJade</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">ialayers</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">ialayers</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">ialayers</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">ialayers</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">rag_pipeline_image</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">rag_pipeline_image</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">rag_pipeline_image</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">bge_m3</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">langfuse</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">zheng2023judging</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">llamaindex</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">docling</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">pymupdf</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">pdfplumber</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">WJade</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">copilot</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">ibmwatson</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">notionai</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">duetai</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">openai</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">anthropic</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">google_gemini</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">mistral</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">llama3</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">rag_pipeline_image</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">rag_pipeline_image</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">rag_pipeline_image</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">llamaindex</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">langchain</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">openai</bcf:citekey>
     <bcf:citekey order="18" intorder="1">bge_m3</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">langfuse</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">vscode</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">python</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">github</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">postgresql</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">langfuse</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">ragas_multilingual</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">e5_microsoft</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">langfuse</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">llamaindex</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">docling</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">pymupdf</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">pdfplumber</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">bge_m3</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">langfuse</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">vscode</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">python</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">github</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">figma</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">postgresql</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">langfuse</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">fastapi</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">nextjs</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">llamaindex</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">docling</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">jwt</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">openrouter</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">huggingface</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">claude</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">qwen</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
